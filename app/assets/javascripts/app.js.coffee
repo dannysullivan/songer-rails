@@ -1,13 +1,13 @@
-angular.module('flapperNews', [ 'ngResource', 'ngRoute' ])
+angular.module('flapperNews', [ 'templates', 'ngResource', 'ngRoute' ])
 .config ['$routeProvider',
   ($routeProvider) ->
     $routeProvider.
       when('/posts', {
-        templateUrl: 'assets/posts/index.html',
+        templateUrl: 'posts/index.html',
         controller: 'PostsCtrl'
       }).
       when('/posts/new', {
-        templateUrl: 'assets/posts/new.html',
+        templateUrl: 'posts/new.html',
         controller: 'PostsCtrl'
       }).
       otherwise({

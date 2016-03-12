@@ -15,5 +15,7 @@
 //= require twitter/bootstrap
 //= require angular
 //= require angular-resource
+//= require angular-rails-templates
 //= require angular-route
+//= require_tree ../templates
 //= require_tree .
