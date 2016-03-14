@@ -5,4 +5,4 @@
         %h2 Rhythms
         %button.btn.btn-primary#create-rhythm(ng-click="ctrl.createRhythm()") Create new rhythm
         .rhythms(ng-repeat="rhythm in ctrl.rhythms track by $index")
-          %p.lead {{ rhythm }}
+          %p.rhythm.lead {{ rhythm }}
