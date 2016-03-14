@@ -1,4 +1,4 @@
-angular.module('flapperNews', [ 'templates', 'ngResource', 'ngRoute' ])
+angular.module('songer', [ 'templates', 'ngResource', 'ngRoute' ])
 .config ['$routeProvider',
   ($routeProvider) ->
     $routeProvider.

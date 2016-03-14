@@ -1,3 +1,3 @@
-angular.module('flapperNews').factory('Post', ['$resource', ($resource) ->
+angular.module('songer').factory('Post', ['$resource', ($resource) ->
   $resource '/api/posts/:id'
 ])
