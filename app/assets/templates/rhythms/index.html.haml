@@ -1,0 +1,5 @@
+.container(ng-controller="RhythmsCtrl as ctrl")
+  Rhythms
+  %button.btn.btn-primary#create-rhythm(ng-click="ctrl.createRhythm()") Create new rhythm
+  .rhythms(ng-repeat="rhythm in ctrl.rhythms track by $index")
+    .rhythm {{ rhythm }}
