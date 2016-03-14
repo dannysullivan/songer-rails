@@ -3,6 +3,6 @@
     .col-sm-12
       .rhythm-wrapper.text-center
         %h2 Rhythms
+        %button.btn.btn-primary#create-rhythm(ng-click="ctrl.createRhythm()") Create new rhythm
         .rhythms(ng-repeat="rhythm in ctrl.rhythms track by $index")
           %p.lead {{ rhythm }}
-        %button.btn.btn-primary#create-rhythm(ng-click="ctrl.createRhythm()") Create new rhythm
