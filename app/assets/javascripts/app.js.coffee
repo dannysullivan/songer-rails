@@ -1,4 +1,4 @@
-angular.module('songer', [ 'templates', 'ngResource', 'ngRoute' ])
+angular.module('songer', [ 'templates', 'ngRoute' ])
 .config ['$routeProvider',
   ($routeProvider) ->
     $routeProvider.
