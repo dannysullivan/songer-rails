@@ -3,12 +3,12 @@ require 'rails_helper'
 
 describe 'rhythms interface', :js do
   it 'displays a title' do
-    visit "/#/rhythms"
+    visit root_path
     expect(page).to have_content "Rhythms"
   end
 
   it 'creates a new rhythm' do
-    visit "/#/rhythms"
+    visit root_path
     expect(page).not_to have_selector '.rhythm'
     click_on "Create new rhythm"
     within '.rhythm' do

@@ -10,4 +10,8 @@
       .container
         .navbar-header
           = link_to "Songer", root_path, class: "navbar-brand"
+        .navbar
+          %ul.nav.navbar-nav.navbar-right
+            %li
+              %a(href="/#/songs/new") New Song
     = yield

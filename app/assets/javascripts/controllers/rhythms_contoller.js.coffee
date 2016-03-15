@@ -9,6 +9,7 @@ angular.module('songer').controller 'RhythmsCtrl', ->
     rhythm
 
   controller = @
+
   controller.rhythms = []
   controller.createRhythm = ->
     rhythm = randomRhythm()
