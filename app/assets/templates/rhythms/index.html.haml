@@ -2,10 +2,11 @@
   .row
     .col-sm-12
       .rhythm-wrapper.text-center
-        %h2 Rhythms
+        %h2.text-center Rhythms
         %button.btn.btn-primary#create-rhythm(ng-click="ctrl.createRhythm()") Create new rhythm
         .rhythms(ng-repeat="rhythm in ctrl.rhythms")
-          %p.rhythm.lead(ng-click="ctrl.toggleSelected(rhythm)" ng-class="{mark: ctrl.isSelected(rhythm)}") {{ rhythm }}
-          %button.btn.btn-default(ng-click="ctrl.startMidiPlayback(rhythm)") Play
-
-        %a.btn.btn-primary(ng-href="/#/song?rhythms={{ctrl.selectedRhythms}}" ng-disabled="ctrl.selectedRhythms.length < 1") Create song
+          .row
+            .col-sm-2.col-sm-offset-4
+              %p.rhythm.lead(ng-click="ctrl.toggleSelected(rhythm)" ng-class="{mark: ctrl.isSelected(rhythm)}") {{ rhythm }}
+            .col-sm-2
+              %button.btn.btn-default(ng-click="ctrl.startMidiPlayback(rhythm)") Play
