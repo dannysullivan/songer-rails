@@ -7,13 +7,13 @@ class Song < ActiveRecord::Base
 
     melody = MIDI::Track.new(midi_song)
     midi_song.tracks << melody
+    quarter_note_length = midi_song.note_to_delta('quarter')
 
-    melody.events << MIDI::NoteOnEvent.new(0, 50, 15)
-    melody.events << MIDI::NoteOffEvent.new(0, 50, 15, midi_song.length_to_delta(2/1.0))
+    melody.events << MIDI::NoteOn.new(0, 50, 127, 0)
+    melody.events << MIDI::NoteOff.new(0, 50, 127, quarter_note_length)
 
-    midi_song
-    file = File.new('midifile.mid', 'w')
-    file.write(midi_song)
+    file = File.new('midifile.mid', 'wb')
+    midi_song.write(file)
     file
   end
 end
