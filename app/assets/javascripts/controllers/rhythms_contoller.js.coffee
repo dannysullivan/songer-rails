@@ -17,8 +17,6 @@ angular.module('songer').controller 'RhythmsCtrl', ->
       rhythm = randomRhythm()
     controller.rhythms.push rhythm 
 
-  controller.playingBack = true
-
   controller.startMidiPlayback = (rhythm) ->
     onSuccess = ->
       note = 50

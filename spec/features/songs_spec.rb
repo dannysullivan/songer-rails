@@ -33,6 +33,20 @@ describe 'new song interface', :js do
     expect(page).to have_content "x..x..x."
     expect(page).to have_content ".x.x.x.x"
   end
+
+  it 'generates lyrics when song is created' do
+    visit root_path
+    within '.navbar-default' do
+      click_on "New Song"
+    end
+    expect(page).to have_content "New Song"
+
+    fill_in "Pattern", with: "x..x..x."
+
+    click_on "Save Song"
+    expect(page).to have_content "Song created"
+    expect(page).to have_content "la la la"
+  end
 end
 
 describe 'show song interface', :js do
