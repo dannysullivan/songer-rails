@@ -2,23 +2,16 @@
   .row
     .col-sm-12
       .song-form(ng-controller="NewSongCtrl as ctrl")
-        %form(ng-submit="ctrl.createArrangement(8)" action="#")
+        %button.btn.btn-default(ng-click="ctrl.createRhythms()") Create Rhythms
+        %form(action="")
           %label
             Rhythm 1
             %input(type="string" ng-model="ctrl.rhythm1")
           %label
             Rhythm 2
             %input(type="string" ng-model="ctrl.rhythm2")
-          %input.btn.btn-primary(type="submit" value="Create Pattern")
+        %button.btn.btn-primary(ng-click="ctrl.createArrangement(8)") Create Pattern
 
         = simple_form_for(Song.new, html: { class: 'form-horizontal' }) do |form|
           = form.input :pattern, input_html: {'ng-model' => 'ctrl.pattern'}
           = form.button :submit, "Save Song"
-
-  .row
-    .col-sm-12
-      .arrangement(ng-show="ctrl.arrangement")
-        %h2 Arrangement
-        %p
-          %span(ng-repeat="measure in ctrl.arrangement track by $index")
-            = "{{ measure }} | "
