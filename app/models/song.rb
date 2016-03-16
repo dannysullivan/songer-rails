@@ -1,4 +1,6 @@
 class Song < ActiveRecord::Base
+  validates_presence_of :pattern
+
   def to_midi
     midi_song = MIDI::Sequence.new
     meta_track = MIDI::Track.new(midi_song)

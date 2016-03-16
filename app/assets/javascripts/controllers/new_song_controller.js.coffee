@@ -9,4 +9,6 @@ angular.module('songer').controller 'NewSongCtrl', ->
       index = Math.floor(Math.random()*rhythms.length)
       controller.arrangement.push(rhythms[index])
 
+    controller.pattern = controller.arrangement.join('')
+
   controller
