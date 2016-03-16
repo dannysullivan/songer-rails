@@ -3,13 +3,12 @@
     .col-sm-12
       .song-form(ng-controller="NewSongCtrl as ctrl")
         %button.btn.btn-default(ng-click="ctrl.createRhythms()") Create Rhythms
-        %form(action="")
-          %label
-            Rhythm 1
-            %input(type="string" ng-model="ctrl.rhythm1")
-          %label
-            Rhythm 2
-            %input(type="string" ng-model="ctrl.rhythm2")
+        %label
+          Rhythm 1
+          %input.form-control(type="string" ng-model="ctrl.rhythm1")
+        %label
+          Rhythm 2
+          %input(type="string" ng-model="ctrl.rhythm2")
         %button.btn.btn-primary(ng-click="ctrl.createArrangement(8)") Create Pattern
 
         = simple_form_for(Song.new, html: { class: 'form-horizontal' }) do |form|
