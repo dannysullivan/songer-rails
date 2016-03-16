@@ -8,15 +8,11 @@ describe 'new song interface', :js do
       click_on "New Song"
     end
     expect(page).to have_content "New Song"
-    expect(page).not_to have_selector ".arrangement"
-    fill_in "Rhythm 1", with: "x..x..x."
-    fill_in "Rhythm 2", with: ".x..x..x"
+    fill_in "Pattern", with: "x..x..x."
 
-    click_on "Create Arrangement"
-    within ".arrangement" do
-      expect(page).to have_content "x"
-      expect(page).to have_content "."
-    end
+    click_on "Save Song"
+    expect(page).to have_content "Song saved"
+    expect(page).to have_content "x..x..x."
   end
 end
 

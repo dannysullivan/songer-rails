@@ -15,7 +15,10 @@
             %li
               %a(href="/#/rhythms") Rhythms
             %li
-              %a(href="/#/songs/new") New Song
+              = link_to "New Song", new_song_path
             %li
               = link_to "Songs", songs_path
+    .container
+      - if flash[:notice]
+        .alert.alert-success.text-center= flash[:notice]
     = yield

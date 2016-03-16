@@ -27,10 +27,9 @@ gem "jasmine", github: "pivotal/jasmine-gem"
 gem "active_model_serializers", "~> 0.9.0"
 gem "twitter-bootstrap-rails"
 gem 'angular_rails_csrf'
-gem "pundit"
-gem 'clearance'
 gem 'angular-rails-templates'
 gem 'midilib'
+gem 'simple_form', '3.1.0.rc2'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

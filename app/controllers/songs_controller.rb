@@ -13,7 +13,8 @@ class SongsController < ApplicationController
 
   def create
     @song = Song.create(song_params)
-    redirect_to songs_path
+    flash.notice = "Song created"
+    redirect_to song_path(@song)
   end
 
   def default_serializer_options

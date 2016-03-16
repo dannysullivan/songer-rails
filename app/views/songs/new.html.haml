@@ -1,0 +1,14 @@
+.container
+  .row
+    .col-sm-12
+      = simple_form_for(Song.new, html: { class: 'form-horizontal' }) do |form|
+        = form.input :pattern
+        = form.button :submit, "Save Song"
+
+  .row
+    .col-sm-12
+      .arrangement(ng-show="ctrl.arrangement")
+        %h2 Arrangement
+        %p
+          %span(ng-repeat="measure in ctrl.arrangement track by $index")
+            = "{{ measure }} | "
