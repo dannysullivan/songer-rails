@@ -3,6 +3,7 @@ angular.module('songer').controller 'NewSongCtrl', ->
     values = ['x', '.']
 
     rhythm = ""
+    # todo: remove hardcoded number of notes
     for i in [0..7]
       index = Math.floor(Math.random()*2)
       rhythm = rhythm + values[index]

@@ -5,6 +5,10 @@ class Song < ActiveRecord::Base
     [0, 5]
   end
 
+  def melody_notes
+    [0, 2, 4, 7, 9]
+  end
+
   def measures
     self.pattern.length / 8
   end
@@ -24,8 +28,9 @@ class Song < ActiveRecord::Base
 
     self.pattern.split('').each do |note|
       if note == "x"
-        melody.events << MIDI::NoteOn.new(0, 64, 127, offset)
-        melody.events << MIDI::NoteOff.new(0, 64, 127, eighth_note_length)
+        melody_note = 64 + self.melody_notes.sample
+        melody.events << MIDI::NoteOn.new(0, melody_note, 127, offset)
+        melody.events << MIDI::NoteOff.new(0, melody_note, 127, eighth_note_length)
         offset = 0
       else
         offset += eighth_note_length
