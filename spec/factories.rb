@@ -4,8 +4,7 @@ FactoryGirl.define do
     password "example"
   end
 
-  factory :post do
-    title "Test Title"
-    body "This is a fake post for testing"
+  factory :song do
+    pattern "x..x..x."
   end
 end

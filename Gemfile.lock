@@ -124,6 +124,7 @@ GEM
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
+    midilib (2.0.4)
     mime-types (2.99.1)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
@@ -251,6 +252,7 @@ DEPENDENCIES
   jasmine!
   jbuilder (~> 2.0)
   jquery-rails
+  midilib
   pg
   pry
   pundit

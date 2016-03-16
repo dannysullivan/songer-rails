@@ -8,7 +8,7 @@ angular.module('songer', [ 'templates', 'ngRoute' ])
       }).
       when('/songs/new', {
         templateUrl: 'songs/new.html',
-        controller: 'SongCtrl'
+        controller: 'NewSongCtrl'
       }).
       otherwise({
         redirectTo: '/rhythms'

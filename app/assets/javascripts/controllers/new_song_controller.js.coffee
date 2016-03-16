@@ -1,4 +1,4 @@
-angular.module('songer').controller 'SongCtrl', ->
+angular.module('songer').controller 'NewSongCtrl', ->
   controller = @
 
   controller.createArrangement = (numberOfMeasures) ->

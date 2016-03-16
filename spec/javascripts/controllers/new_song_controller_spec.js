@@ -1,12 +1,12 @@
 (function(){
   'use strict';
 
-  describe('Controller: SongCtrl', function () {
+  describe('Controller: NewSongCtrl', function () {
     beforeEach(module('songer'));
 
     var vm;
     beforeEach(inject(function ($controller) {
-      vm = $controller("SongCtrl");
+      vm = $controller("NewSongCtrl");
     }));
 
     describe('#createArrangement', function() {

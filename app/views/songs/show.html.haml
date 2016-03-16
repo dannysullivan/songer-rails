@@ -1,0 +1,8 @@
+.container
+  .row
+    .col-sm-12
+      %h2 Viewing Song
+  .row
+    .col-sm-12
+      %p= @song.pattern
+      = link_to "Download as MIDI", song_path(@song, format: :mid)

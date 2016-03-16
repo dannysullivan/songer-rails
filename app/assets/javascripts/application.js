@@ -16,7 +16,6 @@
 //= require angular
 //= require midi
 //= require Base64binary
-//= require angular-resource
 //= require angular-rails-templates
 //= require angular-route
 //= require_tree ../templates

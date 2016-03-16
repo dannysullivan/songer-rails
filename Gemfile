@@ -30,6 +30,7 @@ gem 'angular_rails_csrf'
 gem "pundit"
 gem 'clearance'
 gem 'angular-rails-templates'
+gem 'midilib'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
