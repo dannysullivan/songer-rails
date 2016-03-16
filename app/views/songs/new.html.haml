@@ -13,4 +13,5 @@
 
         = simple_form_for(Song.new, html: { class: 'form-horizontal' }) do |form|
           = form.input :pattern, input_html: {'ng-model' => 'ctrl.pattern'}
+          = form.input :lyrics
           = form.button :submit, "Save Song"

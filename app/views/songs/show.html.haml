@@ -5,4 +5,5 @@
   .row
     .col-sm-12
       %p= @song.pattern
+      %p= @song.lyrics
       = link_to "Download as MIDI", song_path(@song, format: :mid)

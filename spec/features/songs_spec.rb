@@ -2,17 +2,19 @@ require 'spec_helper'
 require 'rails_helper'
 
 describe 'new song interface', :js do
-  it 'allows user to specify a pattern' do
+  it 'allows user to specify a pattern and lyrics' do
     visit root_path
     within '.navbar-default' do
       click_on "New Song"
     end
     expect(page).to have_content "New Song"
     fill_in "Pattern", with: "x..x..x."
+    fill_in "Lyrics", with: "La la la la la"
 
     click_on "Save Song"
     expect(page).to have_content "Song created"
     expect(page).to have_content "x..x..x."
+    expect(page).to have_content "La la la la la"
   end
 
   it 'creates a pattern' do
