@@ -24,6 +24,10 @@ class Song < ActiveRecord::Base
     self.pattern.length / 8
   end
 
+  def lyrics
+    self.sections.map(&:lyrics).join(' ')
+  end
+
   def pattern
     self.sections.map(&:pattern).join('')
   end
