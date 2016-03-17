@@ -15,16 +15,6 @@ class Song < ActiveRecord::Base
     [0, 2, 4, 7, 9]
   end
 
-  def number_of_melody_notes
-    self.pattern.split('').count{|beat| beat=="x"}
-  end
-
-  def create_lyrics
-    unless self.lyrics.present?
-      self.lyrics = LyricsFetcher.pick_lyrics(self.number_of_melody_notes).join(' ')
-    end
-  end
-
   def measures
     self.pattern.length / 8
   end
