@@ -25,4 +25,5 @@ angular.module('songer').controller 'NewSongCtrl', ->
     controller.rhythm1 = createRhythm()
     controller.rhythm2 = createRhythm()
 
+  controller.createRhythms()
   controller

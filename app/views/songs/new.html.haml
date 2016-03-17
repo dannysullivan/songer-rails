@@ -1,17 +1,23 @@
 .container
-  .row
-    .col-sm-12
-      .song-form(ng-controller="NewSongCtrl as ctrl")
-        %button.btn.btn-default(ng-click="ctrl.createRhythms()") Create Rhythms
+  .song-form(ng-controller="NewSongCtrl as ctrl")
+    .row
+      .col-sm-12
+        %h2 New Song
+    .row
+      .col-sm-12
         %label
           Rhythm 1
           %input.form-control(type="string" ng-model="ctrl.rhythm1")
         %label
           Rhythm 2
-          %input(type="string" ng-model="ctrl.rhythm2")
+          %input.form-control(type="string" ng-model="ctrl.rhythm2")
+        %button.btn.btn-default(ng-click="ctrl.createRhythms()") Change Rhythms
+    .row
+      .col-sm-12
         %button.btn.btn-primary(ng-click="ctrl.createArrangement(4)") Create Pattern
 
-        = simple_form_for(Song.new, html: { class: 'form-horizontal' }) do |form|
+    .row
+      .col-sm-12
+        = simple_form_for(Song.new) do |form|
           = form.input :pattern, input_html: {'ng-model' => 'ctrl.pattern'}
-          = form.input :lyrics
           = form.button :submit, "Save Song"
