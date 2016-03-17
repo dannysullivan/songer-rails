@@ -5,6 +5,7 @@ FactoryGirl.define do
   end
 
   factory :song do
-    pattern "x..x..x."
+    rhythm1 "x..x..x."
+    rhythm2 "x.x.x.x."
   end
 end

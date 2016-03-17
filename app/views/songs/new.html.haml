@@ -5,19 +5,8 @@
         %h2 New Song
     .row
       .col-sm-12
-        %label
-          Rhythm 1
-          %input.form-control(type="string" ng-model="ctrl.rhythm1")
-        %label
-          Rhythm 2
-          %input.form-control(type="string" ng-model="ctrl.rhythm2")
         %button.btn.btn-default(ng-click="ctrl.createRhythms()") Change Rhythms
-    .row
-      .col-sm-12
-        %button.btn.btn-primary(ng-click="ctrl.createArrangement(4)") Create Pattern
-
-    .row
-      .col-sm-12
         = simple_form_for(Song.new) do |form|
-          = form.input :pattern, input_html: {'ng-model' => 'ctrl.pattern'}
+          = form.input :rhythm1, input_html: {'ng-model' => 'ctrl.rhythm1'}
+          = form.input :rhythm2, input_html: {'ng-model' => 'ctrl.rhythm2'}
           = form.button :submit, "Save Song"

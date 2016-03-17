@@ -11,19 +11,21 @@ class SongsController < ApplicationController
     end
   end
 
+  def update
+    song = Song.find(params[:id])
+    song.update_attributes(song_params)
+    redirect_to song_path(song)
+  end
+
   def create
     @song = Song.create(song_params)
     flash.notice = "Song created"
     redirect_to song_path(@song)
   end
 
-  def default_serializer_options
-    {root: false}
-  end
-
   private
 
   def song_params
-    params.require(:song).permit(:pattern, :lyrics)
+    params.require(:song).permit(:rhythm1, :rhythm2, sections_attributes: [:pattern])
   end
 end

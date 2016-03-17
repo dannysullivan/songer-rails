@@ -1,10 +1,14 @@
 class Song < ActiveRecord::Base
-  validates_presence_of :pattern
-
-  before_save :create_lyrics
+  validates_presence_of :rhythm1, :rhythm2
+  has_many :sections
+  accepts_nested_attributes_for :sections
 
   def bass_notes
     [0, 5]
+  end
+
+  def sections_attributes=(attributes)
+    self.sections.create(attributes)
   end
 
   def melody_notes
@@ -23,6 +27,10 @@ class Song < ActiveRecord::Base
 
   def measures
     self.pattern.length / 8
+  end
+
+  def pattern
+    self.sections.map(&:pattern).join('')
   end
 
   def to_midi

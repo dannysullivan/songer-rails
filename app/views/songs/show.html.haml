@@ -1,9 +1,26 @@
-.container
-  .row
-    .col-sm-12
-      %h2 Viewing Song
-  .row
-    .col-sm-12
-      %p= @song.pattern
-      %p= @song.lyrics
-      = link_to "Download as MIDI", song_path(@song, format: :mid)
+.song(ng-controller="SongCtrl as ctrl" ng-init="ctrl.createPattern(8, '#{@song.rhythm1}', '#{@song.rhythm2}')")
+  .container
+    .row
+      .col-sm-12
+        %h2 Viewing Song
+    .row
+      .col-sm-12
+        %p= @song.rhythm1
+        %p= @song.rhythm2
+        = link_to "Download as MIDI", song_path(@song, format: :mid)
+
+    .row
+      .col-sm-12
+        %h2 Sections
+        - @song.sections.each do |section|
+          .section
+            %p= section.pattern
+
+    .row
+      .col-sm-12
+        %h2 Add new section
+        %button.btn.btn-default(ng-click="ctrl.createPattern(8, '#{@song.rhythm1}', '#{@song.rhythm2}')") Create pattern
+        = simple_form_for(@song, method: :put) do |form|
+          = form.simple_fields_for(:sections_attributes) do |section_fields|
+            = section_fields.input :pattern, input_html: {'ng-model' => 'ctrl.pattern'}
+          = form.button :submit, "Create new section"
