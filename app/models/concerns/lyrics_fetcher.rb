@@ -11,7 +11,6 @@ module LyricsFetcher
     "the",
     "name",
     "of",
-    "very",
     "to",
     "through",
     "and",
