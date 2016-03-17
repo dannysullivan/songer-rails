@@ -7,7 +7,7 @@
       .col-sm-12
         %p= @song.rhythm1
         %p= @song.rhythm2
-        = link_to "Download as MIDI", song_path(@song, format: :mid)
+        = link_to "Download as MIDI", manual_song_path(@song, format: :mid)
 
     .row
       .col-sm-12
@@ -21,7 +21,7 @@
       .col-sm-12
         %h2 Add new section
         %button.btn.btn-default(ng-click="ctrl.createPattern(4, '#{@song.rhythm1}', '#{@song.rhythm2}')") Create pattern
-        = simple_form_for(@song, method: :put) do |form|
+        = simple_form_for(@song, url: manual_song_url(@song), method: :put) do |form|
           = form.simple_fields_for(:sections_attributes) do |section_fields|
             = section_fields.input :pattern, input_html: {'ng-model' => 'ctrl.pattern'}
           = form.button :submit, "Create new section"

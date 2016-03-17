@@ -11,13 +11,6 @@
         .navbar-header
           = link_to "Songer", root_path, class: "navbar-brand"
         .navbar
-          %ul.nav.navbar-nav.navbar-right
-            %li
-              %a(href="/#/rhythms") Rhythms
-            %li
-              = link_to "New Song", new_song_path
-            %li
-              = link_to "Songs", songs_path
     .container
       - if flash[:notice]
         .alert.alert-success.text-center= flash[:notice]
