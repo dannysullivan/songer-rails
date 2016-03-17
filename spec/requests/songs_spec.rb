@@ -6,7 +6,7 @@ describe "Songs" do
     it 'returns a midi version of the song' do
       FactoryGirl.create(:song)
 
-      get '/manual_songs/1.mid'
+      get '/songs/1.mid'
 
       expect(response).to be_success
       expect(response.header["Content-Type"]).to eq "audio/midi"

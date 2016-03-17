@@ -4,6 +4,10 @@ class Song < ActiveRecord::Base
   accepts_nested_attributes_for :sections
   after_initialize :set_defaults
 
+  RHYTHM_LENGTH = 16
+  RHYTHMS_PER_SECTION = 2
+  NUMBER_OF_SECTIONS = 4
+
   def bass_notes
     [0, 5]
   end
@@ -25,17 +29,17 @@ class Song < ActiveRecord::Base
   end
 
   def build_default_sections
-    4.times do
+    NUMBER_OF_SECTIONS.times do
       self.create_random_section
     end
   end
 
   def create_random_rhythm
-    8.times.map{['x', '.', '.'].sample}.join
+    RHYTHM_LENGTH.times.map{['x', '.', '.', '.'].sample}.join
   end
 
   def create_random_section
-    pattern = 4.times.map{[self.rhythm1, self.rhythm2].sample}.join
+    pattern = RHYTHMS_PER_SECTION.times.map{[self.rhythm1].sample}.join
     self.sections.build(pattern: pattern)
   end
 

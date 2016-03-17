@@ -4,6 +4,9 @@
       %h2 Viewing song
   .row
     .col-sm-12
+      = link_to "Download as MIDI", manual_song_path(@song, format: :mid)
+  .row
+    .col-sm-12
       .lyrics
         - @song.sections.each do |section|
           %p= section.lyrics
