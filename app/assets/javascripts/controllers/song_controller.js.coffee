@@ -1,14 +1,14 @@
 angular.module('songer').controller 'SongCtrl', ->
   controller = @
 
-  controller.createPattern = (numberOfMeasures, rhythm1, rhythm2) ->
-    rhythms = [rhythm1, rhythm2]
-    controller.measures = []
-
-    for i in [0...numberOfMeasures]
-      index = Math.floor(Math.random()*rhythms.length)
-      controller.measures.push(rhythms[index])
-
-    controller.pattern = controller.measures.join('')
-
+  controller.startPlayback = (midiUrl) ->
+    MIDI.loadPlugin
+      soundfontUrl: "../soundfonts/",
+      instrument: "acoustic_grand_piano",
+      onprogress:((state, progress) ->
+        console.log(state, progress)
+      ),
+      onsuccess: ->
+        player = MIDI.Player
+        player.loadFile midiUrl, MIDI.Player.start
   controller

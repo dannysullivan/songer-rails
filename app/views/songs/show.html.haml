@@ -1,12 +1,16 @@
-.container
-  .row
-    .col-sm-12
-      %h2 Viewing song
-  .row
-    .col-sm-12
-      = link_to "Download as MIDI", manual_song_path(@song, format: :mid)
-  .row
-    .col-sm-12
-      .lyrics
-        - @song.sections.each do |section|
-          %p= section.lyrics
+.song(ng-controller="SongCtrl as ctrl")
+  .container
+    .row
+      .col-sm-12
+        %h2 Viewing song
+    .row
+      .col-sm-12
+        %button.btn.btn-primary.playback-button(ng-click="ctrl.startPlayback('#{song_url(@song, format: :mid)}')") Play
+    .row
+      .col-sm-12
+        = link_to "Download as MIDI", song_path(@song, format: :mid)
+    .row
+      .col-sm-12
+        .lyrics
+          - @song.sections.each do |section|
+            %p= section.lyrics
