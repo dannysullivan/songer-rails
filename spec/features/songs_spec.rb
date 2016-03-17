@@ -2,19 +2,17 @@ require 'spec_helper'
 require 'rails_helper'
 
 describe 'new song interface', :js do
-  it 'allows user to specify a pattern and lyrics' do
+  it 'allows user to specify a pattern and generates lyrics' do
     visit root_path
     within '.navbar-default' do
       click_on "New Song"
     end
     expect(page).to have_content "New Song"
     fill_in "Pattern", with: "x..x..x."
-    fill_in "Lyrics", with: "La la la la la"
 
     click_on "Save Song"
     expect(page).to have_content "Song created"
     expect(page).to have_content "x..x..x."
-    expect(page).to have_content "La la la la la"
   end
 
   it 'creates a pattern' do
@@ -33,23 +31,15 @@ describe 'new song interface', :js do
     expect(page).to have_content "x..x..x."
     expect(page).to have_content ".x.x.x.x"
   end
-
-  it 'generates lyrics when song is created' do
-    visit root_path
-    within '.navbar-default' do
-      click_on "New Song"
-    end
-    expect(page).to have_content "New Song"
-
-    fill_in "Pattern", with: "x..x..x."
-
-    click_on "Save Song"
-    expect(page).to have_content "Song created"
-    expect(page).to have_content "la la la"
-  end
 end
 
 describe 'show song interface', :js do
+  it 'displays lyrics' do
+    song = create(:song, lyrics: 'la la la')
+    visit song_path(song)
+    expect(page).to have_content "la la la"
+  end
+
   it 'displays a download link' do
     create(:song, pattern: 'x..x..x.')
     visit root_path
