@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'rails_helper'
 
-describe 'new song interface', :js do
+describe 'manual new song interface', :js do
   it 'allows user to specify rhythms' do
     visit new_manual_song_path
     expect(page).to have_content "New Song"
@@ -15,7 +15,7 @@ describe 'new song interface', :js do
   end
 end
 
-describe 'show song interface', :js do
+describe 'manual show song interface', :js do
   it 'displays a download link' do
     song = create(:song, rhythm1: 'x..x..x.')
     visit manual_song_path(song)
@@ -24,5 +24,18 @@ describe 'show song interface', :js do
     expect(page).to have_content "x..x..x."
 
     expect(page).to have_link "Download as MIDI"
+  end
+end
+
+describe "automatic song creation", :js do
+  it 'displays a set of lyrics' do
+    allow(LyricsFetcher).to receive(:pick_lyrics).and_return(['la','la','la'])
+
+    visit root_path
+    click_on "Create song"
+    expect(page).to have_content "Song created"
+    within ".lyrics" do
+      expect(page).to have_content 'la la la'
+    end
   end
 end

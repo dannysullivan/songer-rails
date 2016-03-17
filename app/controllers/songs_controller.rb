@@ -1,6 +1,10 @@
 class SongsController < ApplicationController
   def create
-    @songs = Song.all
+    song = Song.new
+    song.build_default_sections
+    song.save
+    flash.notice = "Song created"
+    redirect_to song_path(song)
   end
 
   def show

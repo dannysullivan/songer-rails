@@ -1,0 +1,9 @@
+.container
+  .row
+    .col-sm-12
+      %h2 Viewing song
+  .row
+    .col-sm-12
+      .lyrics
+        - @song.sections.each do |section|
+          %p= section.lyrics
