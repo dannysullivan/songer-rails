@@ -197,7 +197,6 @@ module LyricsFetcher
     "door",
     "any",
     "new",
-    "city",
     "work",
     "tree",
     "part",

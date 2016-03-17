@@ -1,11 +1,12 @@
 angular.module('songer').controller 'NewSongCtrl', ->
   createRhythm = ->
-    values = ['x', '.']
+    # todo: figure out a better way to generate rhythms
+    values = ['x', '.', '.']
 
     rhythm = ""
     # todo: remove hardcoded number of notes
     for i in [0..7]
-      index = Math.floor(Math.random()*2)
+      index = Math.floor(Math.random()*values.length)
       rhythm = rhythm + values[index]
     rhythm
 
