@@ -21,7 +21,7 @@ class Song < ActiveRecord::Base
   end
 
   def measures
-    self.pattern.length / 8
+    self.melody.length / 8
   end
 
   def indexed_lyrics
@@ -38,13 +38,13 @@ class Song < ActiveRecord::Base
     output
   end
 
-  def pattern
-    self.sections.map(&:pattern).join('')
+  def melody
+    self.sections.map(&:pattern).join('').split('')
   end
 
   def build_default_sections
     NUMBER_OF_SECTIONS.times do
-      self.create_random_section
+      self.build_random_section
     end
   end
 
@@ -52,9 +52,9 @@ class Song < ActiveRecord::Base
     RHYTHM_LENGTH.times.map{['x', '.', '.', '.'].sample}.join
   end
 
-  def create_random_section
-    pattern = RHYTHMS_PER_SECTION.times.map{[self.rhythm1].sample}.join
-    self.sections.build(pattern: pattern)
+  def build_random_section
+    rhythmic_pattern = RHYTHMS_PER_SECTION.times.map{[self.rhythm1].sample}.join
+    self.sections.build(rhythmic_pattern: rhythmic_pattern)
   end
 
   def set_defaults
@@ -81,14 +81,14 @@ class Song < ActiveRecord::Base
 
     offset = 0
 
-    self.pattern.split('').each do |note|
-      if note == "x"
-        melody_note = 64 + self.melody_notes.sample
+    self.melody.each do |note|
+      if note == "."
+        offset += eighth_note_length
+      else
+        melody_note = 64 + note.to_i
         melody.events << MIDI::NoteOn.new(0, melody_note, 127, offset)
         melody.events << MIDI::NoteOff.new(0, melody_note, 127, eighth_note_length)
         offset = 0
-      else
-        offset += eighth_note_length
       end
     end
 

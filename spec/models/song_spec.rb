@@ -10,6 +10,15 @@ describe 'Song' do
     end
   end
 
+  describe '#melody' do
+    it 'returns an array of notes' do
+      song = create(:song)
+      song.sections.build(pattern: '0.0.')
+
+      expect(song.melody).to eq (['0', '.', '0', '.'])
+    end
+  end
+
   describe '#indexed_lyrics' do
     it 'returns indexed lyrics, split accross multiple lines' do
       song = Song.new
