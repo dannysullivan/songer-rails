@@ -9,6 +9,7 @@ angular.module('songer').controller 'SongCtrl', ['$scope',
     $scope.wordIndex = -1
 
     controller.startPlayback = (midiUrl) ->
+      $scope.wordIndex = -1
       MIDI.loadPlugin
         soundfontUrl: "../soundfonts/",
         instrument: "acoustic_grand_piano",

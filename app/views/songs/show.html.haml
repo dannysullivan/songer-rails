@@ -2,16 +2,18 @@
   .container
     .row
       .col-sm-12
+        = link_to "< Back", root_path
+    .row
+      .col-sm-12
         %h2 Viewing song
     .row
       .col-sm-12
         %button.btn.btn-primary.playback-button(ng-click="ctrl.startPlayback('#{song_url(@song, format: :mid)}')") Play
-    .row
-      .col-sm-12
-        = link_to "Download as MIDI", song_path(@song, format: :mid)
+        %button.btn.btn-default= link_to "Download as MIDI", song_path(@song, format: :mid)
     .row
       .col-sm-12
         .lyrics
+          %h3 Lyrics
           - @song.indexed_lyrics.each do |section_lyrics|
             %p.section
               - section_lyrics.each do |index, word|

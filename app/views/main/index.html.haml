@@ -1,5 +1,6 @@
 .container
   .row
     .col-sm-12
-      = simple_form_for(Song.new) do |form|
-        = form.button :submit, "Create song"
+      .text-center
+        = simple_form_for(Song.new) do |form|
+          = form.button :submit, "Create song", class: 'btn btn-primary btn-lg'
