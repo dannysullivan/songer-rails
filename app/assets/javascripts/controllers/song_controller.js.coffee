@@ -12,6 +12,7 @@ angular.module('songer').controller 'SongCtrl', ['$scope',
       $scope.wordIndex = -1
       MIDI.loadPlugin
         soundfontUrl: "../soundfonts/",
+        targetFormat: 'mp3',
         instrument: "acoustic_grand_piano",
         onprogress:((state, progress) ->
           console.log(state, progress)
