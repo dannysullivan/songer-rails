@@ -33,7 +33,7 @@ describe "automatic song creation", :js do
 
     visit root_path
     click_on "Create song"
-    expect(page).to have_content "Song created"
+    expect(page).to have_content "Viewing song"
     expect(page).to have_content "Download as MIDI"
     within ".lyrics" do
       expect(page).to have_content 'la la la'

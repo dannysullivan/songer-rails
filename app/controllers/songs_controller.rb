@@ -3,7 +3,6 @@ class SongsController < ApplicationController
     song = Song.new
     song.build_default_sections
     song.save
-    flash.notice = "Song created"
     redirect_to song_path(song)
   end
 

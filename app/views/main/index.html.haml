@@ -2,5 +2,7 @@
   .row
     .col-sm-12
       .text-center
+        %h2 Welcome to Songer
+        %p Click below to generate a new song
         = simple_form_for(Song.new) do |form|
           = form.button :submit, "Create song", class: 'btn btn-primary btn-lg'
