@@ -11,8 +11,8 @@
         = link_to "Download as MIDI", song_path(@song, format: :mid)
     .row
       .col-sm-12
-        %p.lyrics
-          - @song.lyrics.split(' ').each_with_index do |word, index|
-            %span(ng-class="{mark: #{index} == wordIndex}")= word
-          -# - @song.sections.each_with_index do |index, section|
-            -# %p= section.lyrics
+        .lyrics
+          - @song.indexed_lyrics.each do |section_lyrics|
+            %p.section
+              - section_lyrics.each do |index, word|
+                %span(ng-class="{mark: #{index} == wordIndex}")= word

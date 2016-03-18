@@ -24,8 +24,18 @@ class Song < ActiveRecord::Base
     self.pattern.length / 8
   end
 
-  def lyrics
-    self.sections.map(&:lyrics).join(' ')
+  def indexed_lyrics
+    index = 0
+    output = []
+    self.sections.each do |section|
+      section_output = []
+      section.lyrics.split(' ').map do |word|
+        section_output << [index, word]
+        index += 1
+      end
+      output << section_output
+    end
+    output
   end
 
   def pattern
