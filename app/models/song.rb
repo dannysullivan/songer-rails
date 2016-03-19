@@ -8,16 +8,8 @@ class Song < ActiveRecord::Base
   RHYTHMS_PER_SECTION = 2
   NUMBER_OF_SECTIONS = 4
 
-  def bass
-    self.sections.map(&:bass_notes).flatten
-  end
-
   def sections_attributes=(attributes)
     self.sections.create(attributes)
-  end
-
-  def melody_notes
-    [0, 2, 4, 7, 9]
   end
 
   def measures
@@ -40,6 +32,10 @@ class Song < ActiveRecord::Base
 
   def melody
     self.sections.map(&:pattern).join('').split('')
+  end
+
+  def bass
+    self.sections.map(&:bass_notes).flatten
   end
 
   def build_default_sections
