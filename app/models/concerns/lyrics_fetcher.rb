@@ -163,7 +163,6 @@ module LyricsFetcher
     "grow",
     "who",
     "still",
-    "over",
     "learn",
     "know",
     "plant",
