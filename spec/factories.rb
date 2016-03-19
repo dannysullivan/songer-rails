@@ -10,7 +10,6 @@ FactoryGirl.define do
   end
 
   factory :section do
-    pattern "x..x.xx."
-    lyrics "these are test words"
+    rhythmic_pattern "x..x.xx."
   end
 end

@@ -1,13 +1,17 @@
 class Section < ActiveRecord::Base
   belongs_to :song
 
-  before_save :set_default_lyrics
-  before_save :set_default_bass
   attr_reader :rhythmic_pattern
 
   NOTES = [0,2,4,7,9]
   BASS_NOTES = [0,2,4,5,7,9]
   BEATS_PER_MEASURE = 8
+
+  def self.duplicate_without_lyrics(section)
+    section = Section.new(pattern: section.pattern, bass_pattern: section.bass_pattern)
+    section.set_default_lyrics
+    section
+  end
 
   def rhythmic_pattern=(rhythmic_pattern)
     pattern = ""
@@ -20,6 +24,13 @@ class Section < ActiveRecord::Base
     end
 
     self.pattern = pattern
+    self.set_defaults
+    rhythmic_pattern
+  end
+
+  def set_defaults
+    self.set_default_lyrics
+    self.set_default_bass
   end
 
   def measures

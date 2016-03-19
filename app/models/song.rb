@@ -39,9 +39,14 @@ class Song < ActiveRecord::Base
   end
 
   def build_default_sections
-    NUMBER_OF_SECTIONS.times do
-      self.build_random_section
+    2.times do
+      section1 = self.build_random_section
+      section2 = Section.duplicate_without_lyrics(section1)
+      self.sections << section1
+      self.sections << section2
     end
+    self.save
+    self.sections
   end
 
   def create_random_rhythm

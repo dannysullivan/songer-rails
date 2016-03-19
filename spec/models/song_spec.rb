@@ -10,6 +10,18 @@ describe 'Song' do
     end
   end
 
+  describe '#build_default_sections' do
+    it 'plays two sections twice each' do
+      song = create(:song)
+      song.build_default_sections
+      expect(song.sections.length).to eq 4
+      first_section = song.sections.first
+      second_section = song.sections.second
+      expect(first_section.pattern).to eq second_section.pattern
+      expect(first_section.bass_notes).to eq second_section.bass_notes
+    end
+  end
+
   describe '#melody' do
     it 'returns an array of notes' do
       song = create(:song)

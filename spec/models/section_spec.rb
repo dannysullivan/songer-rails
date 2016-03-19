@@ -11,7 +11,19 @@ end
 
 describe '#set_default_bass' do
   it 'picks the right number of bass notes' do
-    section = create(:section, pattern: 'x..x..x.x..x..x.')
+    section = create(:section, rhythmic_pattern: 'x..x..x.x..x..x.')
     expect(section.bass_notes.length).to eq 2
+  end
+end
+
+describe '.duplicate_without_lyrics' do
+  it 'copies the melody and bass from the given section' do
+    section1 = create(:section)
+    section2 = Section.duplicate_without_lyrics(section1)
+    expect(section1).not_to be section2
+    expect(section1.pattern).to eq section2.pattern
+    expect(section1.bass_notes).to eq section2.bass_notes
+    expect(section1.lyrics).not_to eq section2.lyrics
+    expect(section2.lyrics).to be
   end
 end
