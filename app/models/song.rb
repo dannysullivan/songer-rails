@@ -38,6 +38,10 @@ class Song < ActiveRecord::Base
     self.sections.map(&:bass_notes).flatten
   end
 
+  def title
+    self.sections.first.lyrics.split(' ')[0..1].join(' ').titleize
+  end
+
   def build_default_sections
     2.times do
       section1 = self.build_random_section
