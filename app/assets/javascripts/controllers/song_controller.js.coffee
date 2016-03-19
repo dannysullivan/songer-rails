@@ -8,7 +8,8 @@ angular.module('songer').controller 'SongCtrl', ['$scope',
 
     $scope.wordIndex = -1
 
-    controller.startPlayback = (midiUrl) ->
+    controller.startPlayback = ($event, midiUrl) ->
+      $($event.currentTarget).button('loading')
       $scope.wordIndex = -1
       MIDI.loadPlugin
         soundfontUrl: "../soundfonts/",
@@ -18,6 +19,7 @@ angular.module('songer').controller 'SongCtrl', ['$scope',
           console.log(state, progress)
         ),
         onsuccess: ->
+          $($event.currentTarget).button('reset')
           player = MIDI.Player
           player.addListener (data) ->
             if data.message == 144
