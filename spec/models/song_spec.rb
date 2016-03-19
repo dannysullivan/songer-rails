@@ -19,6 +19,16 @@ describe 'Song' do
     end
   end
 
+  describe '#bass' do
+    it 'returns an array of bass notes' do
+      song = build(:song)
+      section = build(:section, bass_pattern: '0575')
+      song.sections << section
+
+      expect(song.bass).to eq ['0', '5', '7', '5']
+    end
+  end
+
   describe '#indexed_lyrics' do
     it 'returns indexed lyrics, split accross multiple lines' do
       song = Song.new

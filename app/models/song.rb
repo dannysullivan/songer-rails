@@ -8,8 +8,8 @@ class Song < ActiveRecord::Base
   RHYTHMS_PER_SECTION = 2
   NUMBER_OF_SECTIONS = 4
 
-  def bass_notes
-    [0, 5]
+  def bass
+    self.sections.map(&:bass_notes).flatten
   end
 
   def sections_attributes=(attributes)
@@ -92,8 +92,8 @@ class Song < ActiveRecord::Base
       end
     end
 
-    bass_notes.cycle(self.measures/2) do |bass_interval|
-      note = 40 + bass_interval
+    self.bass.each do |bass_interval|
+      note = 40 + bass_interval.to_i
       bass.events << MIDI::NoteOn.new(0, note, 127, 0)
       bass.events << MIDI::NoteOff.new(0, note, 127, eighth_note_length*8)
     end
