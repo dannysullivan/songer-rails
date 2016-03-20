@@ -30,6 +30,7 @@ gem 'angular_rails_csrf'
 gem 'angular-rails-templates'
 gem 'midilib'
 gem 'simple_form', '3.1.0.rc2'
+gem 'rails_12factor'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
