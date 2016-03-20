@@ -52,9 +52,7 @@ class Section < ActiveRecord::Base
   end
 
   def set_default_bass
-    unless self.bass_pattern
-      bass_pattern = self.measures.times.map{|index| BASS_NOTES.sample}.join
-      self.bass_pattern = bass_pattern
-    end
+    bass_pattern = self.measures.times.map{|index| BASS_NOTES.sample}.join
+    self.bass_pattern = bass_pattern
   end
 end
