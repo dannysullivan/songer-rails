@@ -14,9 +14,6 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require angular
-//= require angular-rails-templates
-//= require angular-route
-//= require_tree ../templates
 //= require_tree .
 //= require midi/inc/shim/Base64
 //= require midi/inc/shim/Base64
