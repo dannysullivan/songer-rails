@@ -103,7 +103,7 @@ class Song < ActiveRecord::Base
       bass.events << MIDI::NoteOff.new(0, note, 127, eighth_note_length*8)
     end
 
-    file = File.new('midifile.mid', 'wb')
+    file = File.new('tmp/midifile.mid', 'wb')
     midi_song.write(file)
     file
   end
