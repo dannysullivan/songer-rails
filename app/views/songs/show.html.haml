@@ -18,3 +18,7 @@
             %p.section
               - section_lyrics.each do |index, word|
                 %span(ng-class="{mark: #{index} == wordIndex}")= word
+
+        .visible-xs
+          %br
+          %em Playback is currently disabled on mobile devices
