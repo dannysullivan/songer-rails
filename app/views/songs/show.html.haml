@@ -8,12 +8,12 @@
         %h2= @song.title
     .row
       .col-sm-12
-        %button.btn.btn-primary.playback-button(data-loading-text="Loading..." ng-click="ctrl.startPlayback($event, '#{song_url(@song, format: :mid)}')") Play
+        %button.btn.btn-primary.hidden-xs(data-loading-text="Loading..." ng-click="ctrl.startPlayback($event, '#{song_url(@song, format: :mid)}')") Play
         %button.btn.btn-default.hidden-xs= link_to "Download as MIDI", song_path(@song, format: :mid)
     .row
       .col-sm-12
         .lyrics
-          %h3 Lyrics
+          %h3.hidden-xs Lyrics
           - @song.indexed_lyrics.each do |section_lyrics|
             %p.section
               - section_lyrics.each do |index, word|
