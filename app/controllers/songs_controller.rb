@@ -1,4 +1,8 @@
 class SongsController < ApplicationController
+
+  def new
+  end
+
   def create
     song = Song.new
     song.build_default_sections

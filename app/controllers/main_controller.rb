@@ -1,5 +1,5 @@
 class MainController < ApplicationController
   def index
-    "adsf"
+    redirect_to new_song_path
   end
 end
