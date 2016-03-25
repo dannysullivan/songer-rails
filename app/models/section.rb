@@ -47,7 +47,7 @@ class Section < ActiveRecord::Base
 
   def set_default_lyrics
     unless self.lyrics.present?
-      self.lyrics = LyricsFetcher.pick_lyrics(self.number_of_melody_notes).join(' ')
+      self.lyrics = LyricsFetcher.pick_lyrics(self.number_of_melody_notes).map(&:value).join(' ')
     end
   end
 

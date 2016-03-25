@@ -3,8 +3,7 @@ require 'rails_helper'
 
 describe "automatic song creation", :js do
   it 'displays a set of lyrics' do
-    allow(LyricsFetcher).to receive(:pick_lyrics).and_return(['la','la','la'])
-
+    create(:word, value: 'la', syllables: 1)
     visit root_path
     click_on "Create song"
     expect(page).to have_content "Play"

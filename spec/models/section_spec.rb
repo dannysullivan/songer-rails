@@ -18,6 +18,14 @@ describe '#set_default_bass' do
   end
 end
 
+describe '#set_default_lyrics' do
+  it 'sets lyrics to an array of words' do
+    create(:word, value: 'test')
+    section = create(:section, rhythmic_pattern: 'xx')
+    expect(section.lyrics).to eq 'test test'
+  end
+end
+
 describe '.duplicate_without_lyrics' do
   it 'copies the melody and bass from the given section' do
     create(:word, value: 'one')
