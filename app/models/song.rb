@@ -21,9 +21,9 @@ class Song < ActiveRecord::Base
     output = []
     self.sections.each do |section|
       section_output = []
-      section.lyrics.split(' ').map do |word|
-        section_output << [index, word]
-        index += 1
+      section.lyrics_words.map do |word|
+        section_output << [index, word.value]
+        index += word.syllables
       end
       output << section_output
     end
