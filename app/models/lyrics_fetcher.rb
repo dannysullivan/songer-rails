@@ -16,9 +16,9 @@ class LyricsFetcher
       this_word = Word.where("syllables <= ?", syllables).to_a.sample
 
       if this_word
-        this_word = Word.where("syllables <= ?", syllables).to_a.sample
+        lyrics_word = LyricsWord.create(value: this_word.value, syllables: this_word.syllables)
         remaining_syllables = syllables - this_word.syllables
-        [this_word] + self.pick_lyrics_recursive(remaining_syllables)
+        [lyrics_word] + self.pick_lyrics_recursive(remaining_syllables)
       else # no words found
         raise "Couldn't create a lyric with the requested syllable count"
       end

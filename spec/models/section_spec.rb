@@ -22,7 +22,7 @@ describe '#set_default_lyrics' do
   it 'sets lyrics to an array of words' do
     create(:word, value: 'test')
     section = create(:section, rhythmic_pattern: 'xx')
-    expect(section.lyrics).to eq 'test test'
+    expect(section.lyrics_words.map(&:value)).to eq ['test', 'test']
   end
 end
 

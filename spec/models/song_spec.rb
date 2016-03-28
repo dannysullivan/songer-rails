@@ -47,9 +47,11 @@ describe 'Song' do
     it 'returns indexed lyrics, split accross multiple lines' do
       song = Song.new
       2.times do
-        song.sections.build({lyrics: "la la la"})
+        section = song.sections.build
+        section.lyrics_words.build(value: 'la', syllables: 1)
+        section.lyrics_words.build(value: 'la', syllables: 1)
       end
-      expect(song.indexed_lyrics).to eq [[[0, 'la'], [1, 'la'], [2, 'la']], [[3, 'la'], [4, 'la'], [5, 'la']]]
+      expect(song.indexed_lyrics).to eq [[[0, 'la'], [1, 'la']], [[2, 'la'], [3, 'la']]]
     end
   end
 end

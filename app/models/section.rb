@@ -1,5 +1,6 @@
 class Section < ActiveRecord::Base
   belongs_to :song
+  has_many :lyrics_words
 
   attr_reader :rhythmic_pattern
 
@@ -45,10 +46,12 @@ class Section < ActiveRecord::Base
     self.pattern.split('').count{|beat| beat!="."}
   end
 
+  def lyrics
+    self.lyrics_words.map(&:value).join(' ')
+  end
+
   def set_default_lyrics
-    unless self.lyrics.present?
-      self.lyrics = LyricsFetcher.pick_lyrics(self.number_of_melody_notes).map(&:value).join(' ')
-    end
+    self.lyrics_words = LyricsFetcher.pick_lyrics(self.number_of_melody_notes)
   end
 
   def set_default_bass

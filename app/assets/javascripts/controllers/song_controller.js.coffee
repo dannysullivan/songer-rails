@@ -6,8 +6,6 @@ angular.module('songer').controller 'SongCtrl', ['$scope',
       $scope.wordIndex += 1
       $scope.$apply()
 
-    $scope.wordIndex = -1
-
     controller.startPlayback = ($event, midiUrl) ->
       $($event.currentTarget).button('loading')
       $scope.wordIndex = -1
