@@ -42,19 +42,4 @@ describe 'Song' do
       expect(song.bass).to eq ['0', '5', '7', '5']
     end
   end
-
-  describe '#indexed_lyrics' do
-    it 'returns indexed lyrics, split accross multiple lines' do
-      song = Song.new
-      section = song.sections.build
-      section.lyrics_words.build(value: 'la', syllables: 1)
-      section.lyrics_words.build(value: 'testing', syllables: 2)
-
-      section = song.sections.build
-      section.lyrics_words.build(value: 'testing', syllables: 2)
-      section.lyrics_words.build(value: 'la', syllables: 1)
-
-      expect(song.indexed_lyrics).to eq [[[0, 'la'], [1, 'testing']], [[3, 'testing'], [5, 'la']]]
-    end
-  end
 end

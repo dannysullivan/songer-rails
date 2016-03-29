@@ -3,12 +3,20 @@ angular.module('songer').controller 'SongCtrl', ['$scope',
     controller = @
 
     incrementIndex = ->
-      $scope.wordIndex += 1
-      $scope.$apply()
+      controller.syllableIndex += 1
+      word = $(".word:nth-of-type(#{controller.wordIndex})")
+      if controller.syllableIndex == word.data('syllables')
+        controller.wordIndex += 1
+        controller.syllableIndex = 0
+        $('.word.mark').removeClass('mark')
+        $(".word:nth-of-type(#{controller.wordIndex})").addClass('mark')
 
     controller.startPlayback = ($event, midiUrl) ->
       $($event.currentTarget).button('loading')
-      $scope.wordIndex = -1
+      $('.word.mark').removeClass('mark')
+      $(".word:nth-of-type(1)").addClass('mark')
+      controller.syllableIndex = -1
+      controller.wordIndex = 1
       MIDI.loadPlugin
         soundfontUrl: "../soundfonts/",
         instrument: "acoustic_grand_piano",

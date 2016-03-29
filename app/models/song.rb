@@ -16,20 +16,6 @@ class Song < ActiveRecord::Base
     self.melody.length / 8
   end
 
-  def indexed_lyrics
-    index = 0
-    output = []
-    self.sections.each do |section|
-      section_output = []
-      section.lyrics_words.map do |word|
-        section_output << [index, word.value]
-        index += word.syllables
-      end
-      output << section_output
-    end
-    output
-  end
-
   def melody
     self.sections.map(&:pattern).join('').split('')
   end

@@ -14,10 +14,11 @@
       .col-sm-12
         .lyrics
           %h3.hidden-xs Lyrics
-          - @song.indexed_lyrics.each do |section_lyrics|
-            %p.section
-              - section_lyrics.each do |index, word|
-                %span(ng-class="{mark: #{index} == wordIndex}")= word
+          - @song.sections.each do |section|
+            - section.lyrics_words.each do |word|
+              %span.word{'data-syllables' => word.syllables}= word.value
+            %br
+            %br
 
         .visible-xs
           %br
