@@ -13,7 +13,9 @@ class LyricsFetcher
     if syllables == 0
       []
     else
-      this_word = Word.where("syllables <= ?", syllables).to_a.sample
+      words = Word.where("syllables <= ?", syllables)
+      offset = rand(words.count)
+      this_word = words.offset(offset).first
 
       if this_word
         lyrics_word = LyricsWord.create(value: this_word.value, syllables: this_word.syllables)
