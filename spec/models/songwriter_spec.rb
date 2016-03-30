@@ -7,7 +7,8 @@ describe Songwriter do
       songwriter = Songwriter.new
       song = songwriter.song
       beats_in_measure = song.beats_in_measure
-      expect(song.rhythm1.length).to be 2*beats_in_measure
+      expect(song.rhythm1.length).to be beats_in_measure
+      expect(song.rhythm2.length).to be beats_in_measure
     end
   end
 
