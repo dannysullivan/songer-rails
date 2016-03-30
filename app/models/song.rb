@@ -2,8 +2,10 @@ class Song < ActiveRecord::Base
   validates_presence_of :rhythm1, :rhythm2
   has_many :sections
 
+  BEATS_IN_MEASURE = 8
+
   def measures
-    self.melody.length / 8
+    self.melody.length / BEATS_IN_MEASURE
   end
 
   def melody
@@ -51,7 +53,7 @@ class Song < ActiveRecord::Base
     self.bass.each do |bass_interval|
       note = 40 + bass_interval.to_i
       bass.events << MIDI::NoteOn.new(0, note, 127, 0)
-      bass.events << MIDI::NoteOff.new(0, note, 127, eighth_note_length*8)
+      bass.events << MIDI::NoteOff.new(0, note, 127, eighth_note_length*BEATS_IN_MEASURE)
     end
 
     file = File.new('tmp/midifile.mid', 'wb')

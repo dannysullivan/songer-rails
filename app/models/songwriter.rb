@@ -1,9 +1,8 @@
 class Songwriter
   attr_reader :song
 
-  RHYTHM_LENGTH = 16
+  RHYTHM_MEASURES = 2
   RHYTHMS_PER_SECTION = 2
-  BEATS_IN_MEASURE = 8
   BASS_NOTES = [0, 2, 4, 5, 7, 9]
 
   MELODY_NOTES = [0, 2, 4, 7, 9]
@@ -31,7 +30,7 @@ class Songwriter
   def build_section
     rhythmic_pattern = RHYTHMS_PER_SECTION.times.map{@song.rhythm1}.join
     melody = create_melody(rhythmic_pattern)
-    measures = (RHYTHM_LENGTH * RHYTHMS_PER_SECTION) / BEATS_IN_MEASURE
+    measures = RHYTHM_MEASURES * RHYTHMS_PER_SECTION
     bass_pattern = measures.times.map{BASS_NOTES.sample}.join('')
     section = Section.new(pattern: melody,
                           bass_pattern: bass_pattern)
@@ -59,6 +58,6 @@ class Songwriter
   end
 
   def create_random_rhythm
-    RHYTHM_LENGTH.times.map{['x', '.', '.', '.'].sample}.join
+    (RHYTHM_MEASURES * Song::BEATS_IN_MEASURE).times.map{['x', '.', '.', '.'].sample}.join
   end
 end
