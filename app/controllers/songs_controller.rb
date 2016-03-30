@@ -3,10 +3,9 @@ class SongsController < ApplicationController
   end
 
   def create
-    song = Song.new
-    song.build_default_sections
-    song.save
-    redirect_to song_path(song)
+    songwriter = Songwriter.new
+    songwriter.build_default_sections
+    redirect_to song_path(songwriter.song)
   end
 
   def show

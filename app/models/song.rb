@@ -1,16 +1,6 @@
 class Song < ActiveRecord::Base
   validates_presence_of :rhythm1, :rhythm2
   has_many :sections
-  accepts_nested_attributes_for :sections
-  after_initialize :set_defaults
-
-  RHYTHM_LENGTH = 16
-  RHYTHMS_PER_SECTION = 2
-  NUMBER_OF_SECTIONS = 4
-
-  def sections_attributes=(attributes)
-    self.sections.create(attributes)
-  end
 
   def measures
     self.melody.length / 8
@@ -26,31 +16,6 @@ class Song < ActiveRecord::Base
 
   def title
     self.sections.first.lyrics.split(' ')[0..1].join(' ').titleize
-  end
-
-  def build_default_sections
-    2.times do
-      section1 = self.build_random_section
-      section2 = Section.duplicate_without_lyrics(section1)
-      self.sections << section1
-      self.sections << section2
-    end
-    self.save
-    self.sections
-  end
-
-  def create_random_rhythm
-    RHYTHM_LENGTH.times.map{['x', '.', '.', '.'].sample}.join
-  end
-
-  def build_random_section
-    rhythmic_pattern = RHYTHMS_PER_SECTION.times.map{[self.rhythm1].sample}.join
-    self.sections.build(rhythmic_pattern: rhythmic_pattern)
-  end
-
-  def set_defaults
-    self.rhythm1 = self.rhythm1.presence || create_random_rhythm
-    self.rhythm2 = self.rhythm2.presence || create_random_rhythm
   end
 
   def to_midi
