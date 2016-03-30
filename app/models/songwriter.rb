@@ -6,6 +6,8 @@ class Songwriter
   BEATS_IN_MEASURE = 8
   BASS_NOTES = [0, 2, 4, 5, 7, 9]
 
+  MELODY_NOTES = [0, 2, 4, 7, 9]
+
   def initialize
     rhythm1 = create_random_rhythm
     rhythm2 = create_random_rhythm
@@ -26,9 +28,10 @@ class Songwriter
 
   def build_section
     rhythmic_pattern = RHYTHMS_PER_SECTION.times.map{@song.rhythm1}.join
+    melody = create_melody(rhythmic_pattern)
     measures = (RHYTHM_LENGTH * RHYTHMS_PER_SECTION) / BEATS_IN_MEASURE
     bass_pattern = measures.times.map{BASS_NOTES.sample}.join('')
-    section = Section.new(rhythmic_pattern: rhythmic_pattern,
+    section = Section.new(pattern: melody,
                           bass_pattern: bass_pattern)
 
     section.lyrics_words = get_lyrics(section.number_of_melody_notes)
@@ -36,6 +39,12 @@ class Songwriter
   end
 
   private
+
+  def create_melody(rhythmic_pattern)
+    rhythmic_pattern.split('').map do |beat|
+      beat == "x" ? MELODY_NOTES.sample.to_s : '.'
+    end.join('')
+  end
 
   def get_lyrics(number_of_syllables)
     LyricsFetcher.pick_lyrics(number_of_syllables)

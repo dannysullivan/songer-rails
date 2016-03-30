@@ -38,5 +38,13 @@ describe Songwriter do
       expect(section.lyrics_words.map(&:value)).to include 'test'
       expect(section.lyrics_words.map(&:syllables).sum).to eq notes
     end
+
+    it 'picks notes for the melody' do
+      stub_const('Songwriter::MELODY_NOTES', [0])
+      songwriter = Songwriter.new
+      section = songwriter.build_section
+      expect(section.pattern.split('')).to include '0'
+      expect(section.pattern.split('')).to include '.'
+    end
   end
 end
