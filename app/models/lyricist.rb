@@ -5,8 +5,16 @@ class Lyricist
   end
 
   def pick_lyrics(number_of_syllables)
-    first_word = self.get_first_word(number_of_syllables)
-    pick_lyrics_recursive(number_of_syllables, first_word)
+    counter = 5
+    begin
+      first_word = self.get_first_word(number_of_syllables)
+      pick_lyrics_recursive(number_of_syllables, first_word)
+    rescue => exception
+      counter -= 1
+      if counter > 0
+        retry
+      end
+    end
   end
 
   protected
