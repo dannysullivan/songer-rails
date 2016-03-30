@@ -1,7 +1,6 @@
 class Song < ActiveRecord::Base
   validates_presence_of :rhythm1, :rhythm2
   has_many :sections
-  attr_accessor :beats_in_measure
 
   def measures
     self.melody.length / self.beats_in_measure
