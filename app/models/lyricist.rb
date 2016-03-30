@@ -25,7 +25,10 @@ class Lyricist
 
   def get_next_word(word, remaining_syllables)
     words = @markov_chain.next_words(word)
-    word = words.select{|word| SyllableLookup.find(word) <= remaining_syllables}.sample
+    word = words.select do |word|
+      syllables = SyllableLookup.find(word)
+      syllables <= remaining_syllables && syllables > 0
+    end.sample
     word
   end
 
