@@ -13,6 +13,8 @@ class Lyricist
       counter -= 1
       if counter > 0
         retry
+      else
+        raise exception
       end
     end
   end

@@ -28,21 +28,20 @@ describe Songwriter do
   describe '#build_section' do
     it 'picks the right number of bass notes' do
       songwriter = Songwriter.new
-      section = songwriter.build_section
+      section = songwriter.build_section('x...x...x...x...')
       expect(section.bass_notes.length).to eq 4
     end
 
     it 'sets lyrics to an array of words' do
       songwriter = Songwriter.new
-      section = songwriter.build_section
-      notes = section.number_of_melody_notes
-      expect(section.lyrics_words.map(&:syllables).sum).to eq notes
+      section = songwriter.build_section('xxxxxx..')
+      expect(section.lyrics_words.map(&:syllables).sum).to eq 6
     end
 
     it 'picks notes for the melody' do
       stub_const('Songwriter::MELODY_NOTES', [0])
       songwriter = Songwriter.new
-      section = songwriter.build_section
+      section = songwriter.build_section('xxxxxx..')
       expect(section.pattern.split('')).to include '0'
       expect(section.pattern.split('')).to include '.'
     end

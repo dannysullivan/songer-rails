@@ -20,18 +20,22 @@ class Songwriter
   end
 
   def build_default_sections
-    2.times do
-      section1 = build_section
-      section2 = duplicate_section_with_new_lyrics(section1)
-      @song.sections << section1
-      @song.sections << section2
-    end
+    build_part_of_song([@song.rhythm1])
+    build_part_of_song([@song.rhythm1, @song.rhythm2])
+
     @song.save
     @song.sections
   end
 
-  def build_section
-    rhythmic_pattern = RHYTHMS_PER_SECTION.times.map{[@song.rhythm1, @song.rhythm2].sample}.join
+  def build_part_of_song(rhythms_available)
+    rhythmic_pattern = RHYTHMS_PER_SECTION.times.map{rhythms_available.sample}.join
+    section1 = build_section(rhythmic_pattern)
+    section2 = duplicate_section_with_new_lyrics(section1)
+    @song.sections << section1
+    @song.sections << section2
+  end
+
+  def build_section(rhythmic_pattern)
     melody = create_melody(rhythmic_pattern)
     measures = RHYTHM_MEASURES * RHYTHMS_PER_SECTION
     bass_pattern = measures.times.map{BASS_NOTES.sample}.join('')
