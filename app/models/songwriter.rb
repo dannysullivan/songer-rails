@@ -13,6 +13,7 @@ class Songwriter
     rhythm2 = create_random_rhythm
 
     @song = Song.create(rhythm1: rhythm1, rhythm2: rhythm2)
+    @lyricist = LyricsFetcher
   end
 
   def build_default_sections
@@ -47,7 +48,7 @@ class Songwriter
   end
 
   def get_lyrics(number_of_syllables)
-    LyricsFetcher.pick_lyrics(number_of_syllables)
+    @lyricist.pick_lyrics(number_of_syllables)
   end
 
   def duplicate_section_with_new_lyrics(section)

@@ -1,5 +1,6 @@
 class Lyricist
   def initialize(source)
+    source = source.downcase.gsub(/[^a-z0-9\s]/i, '')
     @markov_chain = MarkovChain.new(source)
   end
 
@@ -11,11 +12,11 @@ class Lyricist
   protected
 
   def get_first_word(syllables)
-    word = @markov_chain.random_word
+    @markov_chain.random_word
   end
 
   def get_next_word(word, remaining_syllables)
-    word = @markov_chain.next_words(word).sample
+    @markov_chain.next_words(word).sample
   end
 
   def pick_lyrics_recursive(syllables, current_word)
