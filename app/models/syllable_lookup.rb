@@ -21,7 +21,6 @@ class SyllableLookup
                   word[-2].chr() != 'l'
       length -= 1
     elsif got.size() > 1 and word[-2..-1] == 'ed'
-      puts "here"
       length -= 1
     end
 

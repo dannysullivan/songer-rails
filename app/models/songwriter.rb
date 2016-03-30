@@ -4,14 +4,17 @@ class Songwriter
   RHYTHM_MEASURES = 2
   RHYTHMS_PER_SECTION = 2
   BASS_NOTES = [0, 2, 4, 5, 7, 9]
+  BEATS_IN_MEASURE = [6, 8]
 
   MELODY_NOTES = [0, 2, 4, 7, 9]
 
   def initialize
-    rhythm1 = create_random_rhythm
-    rhythm2 = create_random_rhythm
+    beats_in_measure = BEATS_IN_MEASURE.sample
+    rhythm1 = create_random_rhythm(beats_in_measure)
+    rhythm2 = create_random_rhythm(beats_in_measure)
 
-    @song = Song.create(rhythm1: rhythm1, rhythm2: rhythm2)
+    @song = Song.create(rhythm1: rhythm1, rhythm2: rhythm2, beats_in_measure: beats_in_measure)
+
     source_material = File.read(Rails.root.join('config', 'source_material.txt'))
     @lyricist = Lyricist.new(source_material)
   end
@@ -57,7 +60,7 @@ class Songwriter
     new_section
   end
 
-  def create_random_rhythm
-    (RHYTHM_MEASURES * Song::BEATS_IN_MEASURE).times.map{['x', '.', '.', '.'].sample}.join
+  def create_random_rhythm(beats_in_measure)
+    (RHYTHM_MEASURES * beats_in_measure).times.map{['x', '.', '.', '.'].sample}.join
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160330154328) do
+ActiveRecord::Schema.define(version: 20160330214348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20160330154328) do
     t.datetime "updated_at"
     t.string   "rhythm1"
     t.string   "rhythm2"
+    t.integer  "beats_in_measure"
   end
 
   create_table "upvotes", force: :cascade do |t|

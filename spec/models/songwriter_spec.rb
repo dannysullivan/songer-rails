@@ -6,7 +6,8 @@ describe Songwriter do
     it 'creates a song with a random rhythmic pattern' do
       songwriter = Songwriter.new
       song = songwriter.song
-      expect(song.rhythm1.length).to be 16
+      beats_in_measure = song.beats_in_measure
+      expect(song.rhythm1.length).to be 2*beats_in_measure
     end
   end
 
