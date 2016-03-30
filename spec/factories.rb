@@ -10,6 +10,7 @@ FactoryGirl.define do
   end
 
   factory :section do
-    rhythmic_pattern "x..x.xx."
+    pattern "0..1.23."
+    bass_pattern "0795"
   end
 end

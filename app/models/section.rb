@@ -5,13 +5,9 @@ class Section < ActiveRecord::Base
   attr_reader :rhythmic_pattern
 
   NOTES = [0,2,4,7,9]
-  BASS_NOTES = [0,2,4,5,7,9]
-  BEATS_PER_MEASURE = 8
 
   def self.duplicate_without_lyrics(section)
-    section = Section.new(pattern: section.pattern, bass_pattern: section.bass_pattern)
-    section.set_default_lyrics
-    section
+    Section.new(pattern: section.pattern, bass_pattern: section.bass_pattern)
   end
 
   def rhythmic_pattern=(rhythmic_pattern)
@@ -25,17 +21,7 @@ class Section < ActiveRecord::Base
     end
 
     self.pattern = pattern
-    self.set_defaults
     rhythmic_pattern
-  end
-
-  def set_defaults
-    self.set_default_lyrics
-    self.set_default_bass
-  end
-
-  def measures
-    self.pattern.length/BEATS_PER_MEASURE
   end
 
   def bass_notes
@@ -48,14 +34,5 @@ class Section < ActiveRecord::Base
 
   def lyrics
     self.lyrics_words.map(&:value).join(' ')
-  end
-
-  def set_default_lyrics
-    self.lyrics_words = LyricsFetcher.pick_lyrics(self.number_of_melody_notes)
-  end
-
-  def set_default_bass
-    bass_pattern = self.measures.times.map{|index| BASS_NOTES.sample}.join
-    self.bass_pattern = bass_pattern
   end
 end

@@ -9,21 +9,6 @@ describe '#rhythmic_pattern=' do
   end
 end
 
-describe '#set_default_bass' do
-  it 'picks the right number of bass notes' do
-    section = create(:section, rhythmic_pattern: 'x..x..x.x..x..x.')
-    expect(section.bass_notes.length).to eq 2
-  end
-end
-
-describe '#set_default_lyrics' do
-  it 'sets lyrics to an array of words' do
-    stub_const('SYLLABLES', {test: 1})
-    section = create(:section, rhythmic_pattern: 'xx')
-    expect(section.lyrics_words.map(&:value)).to eq ['test', 'test']
-  end
-end
-
 describe '.duplicate_without_lyrics' do
   it 'copies the melody and bass from the given section' do
     section1 = create(:section)
@@ -31,7 +16,6 @@ describe '.duplicate_without_lyrics' do
     expect(section1).not_to be section2
     expect(section1.pattern).to eq section2.pattern
     expect(section1.bass_notes).to eq section2.bass_notes
-    expect(section1.lyrics).not_to eq section2.lyrics
-    expect(section2.lyrics).to be
+    expect(section2.lyrics).to eq ''
   end
 end

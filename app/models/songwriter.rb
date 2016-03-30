@@ -3,6 +3,8 @@ class Songwriter
 
   RHYTHM_LENGTH = 16
   RHYTHMS_PER_SECTION = 2
+  BEATS_IN_MEASURE = 8
+  BASS_NOTES = [0, 2, 4, 5, 7, 9]
 
   def initialize
     rhythm1 = create_random_rhythm
@@ -13,8 +15,8 @@ class Songwriter
 
   def build_default_sections
     2.times do
-      section1 = build_random_section
-      section2 = Section.duplicate_without_lyrics(section1)
+      section1 = build_section
+      section2 = duplicate_section_with_new_lyrics(section1)
       @song.sections << section1
       @song.sections << section2
     end
@@ -22,11 +24,27 @@ class Songwriter
     @song.sections
   end
 
+  def build_section
+    rhythmic_pattern = RHYTHMS_PER_SECTION.times.map{@song.rhythm1}.join
+    measures = (RHYTHM_LENGTH * RHYTHMS_PER_SECTION) / BEATS_IN_MEASURE
+    bass_pattern = measures.times.map{BASS_NOTES.sample}.join('')
+    section = Section.new(rhythmic_pattern: rhythmic_pattern,
+                          bass_pattern: bass_pattern)
+
+    section.lyrics_words = get_lyrics(section.number_of_melody_notes)
+    section
+  end
+
   private
 
-  def build_random_section
-    rhythmic_pattern = RHYTHMS_PER_SECTION.times.map{@song.rhythm1}.join
-    Section.new(rhythmic_pattern: rhythmic_pattern)
+  def get_lyrics(number_of_syllables)
+    LyricsFetcher.pick_lyrics(number_of_syllables)
+  end
+
+  def duplicate_section_with_new_lyrics(section)
+    new_section = Section.duplicate_without_lyrics(section)
+    new_section.lyrics_words = get_lyrics(section.number_of_melody_notes)
+    new_section
   end
 
   def create_random_rhythm
