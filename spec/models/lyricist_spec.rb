@@ -12,7 +12,7 @@ describe Lyricist do
     end
 
     it 'removes capital letters and punctuation from the source' do
-      lyricist = Lyricist.new('It. Is')
+      lyricist = Lyricist.new("It. \nIs")
       3.times do
         lyrics = lyricist.pick_lyrics(2)
         expect(lyrics.map(&:value)).to eq ['it', 'is']

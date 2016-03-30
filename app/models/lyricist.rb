@@ -1,6 +1,6 @@
 class Lyricist
   def initialize(source)
-    source = source.downcase.gsub(/[^a-z0-9\s]/i, '')
+    source = source.downcase.gsub(/[^a-z\s]/i, '')
     @markov_chain = MarkovChain.new(source)
   end
 
@@ -16,7 +16,9 @@ class Lyricist
   end
 
   def get_next_word(word, remaining_syllables)
-    @markov_chain.next_words(word).sample
+    words = @markov_chain.next_words(word)
+    word = words.select{|word| SyllableLookup.find(word) <= remaining_syllables}.sample
+    word
   end
 
   def pick_lyrics_recursive(syllables, current_word)
@@ -24,8 +26,9 @@ class Lyricist
       []
     else
       if current_word
-        lyrics_word = LyricsWord.create(value: current_word, syllables: SYLLABLES[current_word])
-        remaining_syllables = syllables - SYLLABLES[current_word]
+        current_word_syllables = SyllableLookup.find(current_word)
+        lyrics_word = LyricsWord.new(value: current_word, syllables: current_word_syllables)
+        remaining_syllables = syllables - current_word_syllables
         next_word = self.get_next_word(current_word, remaining_syllables)
         [lyrics_word] + self.pick_lyrics_recursive(remaining_syllables, next_word)
       else # no words found

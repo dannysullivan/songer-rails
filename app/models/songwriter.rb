@@ -13,7 +13,8 @@ class Songwriter
     rhythm2 = create_random_rhythm
 
     @song = Song.create(rhythm1: rhythm1, rhythm2: rhythm2)
-    @lyricist = LyricsFetcher
+    source_material = File.read(Rails.root.join('config', 'source_material.txt'))
+    @lyricist = Lyricist.new(source_material)
   end
 
   def build_default_sections

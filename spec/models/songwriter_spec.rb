@@ -31,11 +31,9 @@ describe Songwriter do
     end
 
     it 'sets lyrics to an array of words' do
-      stub_const('SYLLABLES', {test: 1})
       songwriter = Songwriter.new
       section = songwriter.build_section
       notes = section.number_of_melody_notes
-      expect(section.lyrics_words.map(&:value)).to include 'test'
       expect(section.lyrics_words.map(&:syllables).sum).to eq notes
     end
 
