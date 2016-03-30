@@ -3,7 +3,7 @@ require 'rails_helper'
 
 describe "automatic song creation", :js do
   it 'displays a set of lyrics' do
-    create(:word, value: 'la')
+    stub_const("SYLLABLES", {la: 1})
     visit root_path
     click_on "Create song"
     expect(page).to have_content "Play"

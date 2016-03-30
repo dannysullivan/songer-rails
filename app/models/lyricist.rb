@@ -11,13 +11,11 @@ class Lyricist
   protected
 
   def get_first_word(syllables)
-    word_value = @markov_chain.random_word
-    Word.where(value: word_value).first
+    word = @markov_chain.random_word
   end
 
   def get_next_word(word, remaining_syllables)
-    word_value = @markov_chain.next_words(word).sample
-    Word.where(value: word_value).first
+    word = @markov_chain.next_words(word).sample
   end
 
   def pick_lyrics_recursive(syllables, current_word)
@@ -25,9 +23,9 @@ class Lyricist
       []
     else
       if current_word
-        lyrics_word = LyricsWord.create(value: current_word.value, syllables: current_word.syllables)
-        remaining_syllables = syllables - current_word.syllables
-        next_word = self.get_next_word(current_word.value, remaining_syllables)
+        lyrics_word = LyricsWord.create(value: current_word, syllables: SYLLABLES[current_word])
+        remaining_syllables = syllables - SYLLABLES[current_word]
+        next_word = self.get_next_word(current_word, remaining_syllables)
         [lyrics_word] + self.pick_lyrics_recursive(remaining_syllables, next_word)
       else # no words found
         raise "Couldn't create a lyric with the requested syllable count"

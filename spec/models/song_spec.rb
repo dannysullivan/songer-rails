@@ -12,7 +12,6 @@ describe 'Song' do
 
   describe '#build_default_sections' do
     it 'plays two sections twice each' do
-      create(:word)
       song = create(:song)
       song.build_default_sections
       expect(song.sections.length).to eq 4
@@ -34,7 +33,6 @@ describe 'Song' do
 
   describe '#bass' do
     it 'returns an array of bass notes' do
-      create(:word)
       song = build(:song)
       section = build(:section, bass_pattern: '0575')
       song.sections << section
