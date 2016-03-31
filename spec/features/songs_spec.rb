@@ -14,10 +14,10 @@ describe "automatic song creation", :js do
 
   it 'allows user to select a lyrical source' do
     allow_any_instance_of(SongsController).to receive(:read_file)
-      .with('moby_dick').and_return('whale '*16)
+      .with('Moby Dick').and_return('whale '*16)
 
     allow_any_instance_of(SongsController).to receive(:read_file)
-      .with('edgar_allen_poe').and_return('poe '*16)
+      .with('Edgar Allen Poe').and_return('poe '*16)
 
     visit root_path
     select 'Moby Dick', from: 'Lyrics Source'

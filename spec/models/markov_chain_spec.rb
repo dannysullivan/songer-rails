@@ -2,13 +2,10 @@ require 'spec_helper'
 require 'rails_helper'
 
 describe MarkovChain do
-  describe '#random_word' do
-    it 'returns a random word with at least one following word' do
-      markov_chain = MarkovChain.new('it is')
-      expect(markov_chain.random_word).to eq 'it'
-
-      markov_chain = MarkovChain.new('it is this')
-      expect(['it', 'is']).to include markov_chain.random_word
+  describe '#all_words' do
+    it 'returns all words with at least one following word' do
+      markov_chain = MarkovChain.new('about it is')
+      expect(markov_chain.all_words).to eq ['about', 'it']
     end
   end
 

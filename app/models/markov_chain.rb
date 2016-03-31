@@ -16,7 +16,7 @@ class MarkovChain
     @hash[word] || []
   end
 
-  def random_word
-    @hash.keys.sample
+  def all_words
+    @hash.keys
   end
 end

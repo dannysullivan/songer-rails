@@ -19,4 +19,11 @@ describe Lyricist do
       end
     end
   end
+
+  describe '#get_first_word' do
+    it 'does not return any prepositions' do
+      lyricist = Lyricist.new("it is about")
+      expect(lyricist.pick_lyrics(2).map(&:value)).to eq ['it', 'is']
+    end
+  end
 end

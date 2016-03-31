@@ -1,6 +1,8 @@
 class Lyricist
   def initialize(source)
     source = source.downcase.gsub(/[^a-z\s]/i, '')
+
+    source = source.split(' ').reverse.join(' ')
     @markov_chain = MarkovChain.new(source)
   end
 
@@ -8,7 +10,8 @@ class Lyricist
     counter = 5
     begin
       first_word = self.get_first_word(number_of_syllables)
-      pick_lyrics_recursive(number_of_syllables, first_word)
+      lyrics = pick_lyrics_recursive(number_of_syllables, first_word)
+      lyrics.reverse
     rescue => exception
       counter -= 1
       if counter > 0
@@ -22,7 +25,7 @@ class Lyricist
   protected
 
   def get_first_word(syllables)
-    @markov_chain.random_word
+    (@markov_chain.all_words - PREPOSITIONS).sample
   end
 
   def get_next_word(word, remaining_syllables)
