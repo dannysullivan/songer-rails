@@ -8,15 +8,13 @@ class Songwriter
 
   MELODY_NOTES = [0, 2, 4, 7, 9]
 
-  def initialize
+  def initialize(lyricist)
     beats_in_measure = BEATS_IN_MEASURE.sample
     rhythm1 = create_random_rhythm(beats_in_measure)
     rhythm2 = create_random_rhythm(beats_in_measure)
 
+    @lyricist = lyricist
     @song = Song.create(rhythm1: rhythm1, rhythm2: rhythm2, beats_in_measure: beats_in_measure)
-
-    source_material = File.read(Rails.root.join('config', 'source_material.txt'))
-    @lyricist = Lyricist.new(source_material)
   end
 
   def build_default_sections

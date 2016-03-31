@@ -3,7 +3,10 @@ class SongsController < ApplicationController
   end
 
   def create
-    songwriter = Songwriter.new
+    source_material = File.read(Rails.root.join('config', 'sources', 'moby_dick.txt'))
+    lyricist = Lyricist.new(source_material)
+
+    songwriter = Songwriter.new(lyricist)
     songwriter.build_default_sections
     redirect_to song_path(songwriter.song)
   end
