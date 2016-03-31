@@ -5,4 +5,10 @@
         %h2 Welcome to Songer
         %p Click below to generate a new song
         = simple_form_for(Song.new) do |form|
+          %p
+            %label
+              Lyrics Source
+              %select.form-control(name='lyrics_source')
+                - @lyrics_sources.each do |source|
+                  %option{value: source}= source.titleize
           = form.button :submit, "Create song", class: 'btn btn-primary btn-lg'

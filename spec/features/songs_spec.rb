@@ -11,4 +11,26 @@ describe "automatic song creation", :js do
       expect(page).to have_selector '.word'
     end
   end
+
+  it 'allows user to select a lyrical source' do
+    allow_any_instance_of(SongsController).to receive(:read_file)
+      .with('moby_dick').and_return('whale '*16)
+
+    allow_any_instance_of(SongsController).to receive(:read_file)
+      .with('edgar_allen_poe').and_return('poe '*16)
+
+    visit root_path
+    select 'Moby Dick', from: 'Lyrics Source'
+    click_on 'Create song'
+    within '.lyrics' do
+      expect(page).to have_content 'whale'
+    end
+
+    visit root_path
+    select 'Edgar Allen Poe', from: 'Lyrics Source'
+    click_on 'Create song'
+    within '.lyrics' do
+      expect(page).to have_content 'poe'
+    end
+  end
 end

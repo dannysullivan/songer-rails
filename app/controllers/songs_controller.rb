@@ -1,9 +1,10 @@
 class SongsController < ApplicationController
   def new
+    @lyrics_sources = allowed_sources
   end
 
   def create
-    source_material = File.read(Rails.root.join('config', 'sources', 'moby_dick.txt'))
+    source_material = read_file(lyrics_source)
     lyricist = Lyricist.new(source_material)
 
     songwriter = Songwriter.new(lyricist)
@@ -17,5 +18,20 @@ class SongsController < ApplicationController
       format.html
       format.mid { send_file @song.to_midi, type: "audio/midi" }
     end
+  end
+
+  private
+
+  def lyrics_source
+    source = params[:lyrics_source]
+    source if allowed_sources.include?(source)
+  end
+
+  def allowed_sources
+    ['moby_dick', 'edgar_allen_poe']
+  end
+
+  def read_file(file_name)
+    File.read(Rails.root.join('config', 'sources', "#{file_name}.txt"))
   end
 end
