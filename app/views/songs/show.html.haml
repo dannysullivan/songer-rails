@@ -15,10 +15,9 @@
         .lyrics
           %h3.hidden-xs Lyrics
           - @song.sections.each do |section|
-            - section.lyrics_words.each do |word|
-              %span.word{'data-syllables' => word.syllables}= word.value
-            %br
-            %br
+            %p
+              - section.lyrics_words.each do |word|
+                %span.word{'data-syllables' => word.syllables}= word.value
 
         .visible-xs
           %br
