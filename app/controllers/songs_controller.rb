@@ -28,10 +28,11 @@ class SongsController < ApplicationController
   end
 
   def allowed_sources
-    ['moby_dick', 'edgar_allen_poe']
+    ['Dog (Wiki Page)', 'Moby Dick', 'Edgar Allen Poe']
   end
 
   def read_file(file_name)
-    File.read(Rails.root.join('config', 'sources', "#{file_name}.txt"))
+    file_name = file_name.gsub(/\ /, '_').gsub(/\(|\)/, '').downcase
+    File.read(Rails.root.join('config', 'sources', "#{file_name.underscore}.txt"))
   end
 end

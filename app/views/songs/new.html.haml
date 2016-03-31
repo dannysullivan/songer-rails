@@ -10,5 +10,5 @@
               Lyrics Source
               %select.form-control(name='lyrics_source')
                 - @lyrics_sources.each do |source|
-                  %option{value: source}= source.titleize
+                  %option{value: source}= source
           = form.button :submit, "Create song", class: 'btn btn-primary btn-lg'
