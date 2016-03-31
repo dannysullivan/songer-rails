@@ -63,6 +63,11 @@ class Songwriter
   end
 
   def create_random_rhythm(beats_in_measure)
-    (RHYTHM_MEASURES * beats_in_measure).times.map{['x', '.', '.', '.'].sample}.join
+    rhythm = (RHYTHM_MEASURES * beats_in_measure).times.map{['x', '.', '.', '.'].sample}.join
+    if rhythm.split('').uniq == ['.']
+      random_beat = (0..rhythm.length).to_a.sample
+      rhythm[random_beat] = 'x'
+    end
+    rhythm
   end
 end
