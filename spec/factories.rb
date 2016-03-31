@@ -13,4 +13,9 @@ FactoryGirl.define do
     pattern "0..1.23."
     bass_pattern "0795"
   end
+
+  factory :lyrics_word do
+    value "test"
+    syllables 1
+  end
 end

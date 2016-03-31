@@ -3,11 +3,14 @@ class Lyricist
     @markov_chain = source
   end
 
-  def pick_lyrics(number_of_syllables)
+  def pick_rhyming_lines(syllables)
     counter = 5
     begin
-      first_word = self.get_first_word(number_of_syllables)
-      pick_lyrics_recursive(number_of_syllables, first_word)
+      rhymes = @markov_chain.rhymes.select{|array| array.length >= 2}.sample
+      words = rhymes.sample(2)
+      words.map do |word|
+        pick_lyrics_recursive(syllables, word)
+      end
     rescue => exception
       counter -= 1
       if counter > 0
@@ -20,8 +23,12 @@ class Lyricist
 
   protected
 
-  def get_first_word(syllables)
-    (@markov_chain.all_words - PREPOSITIONS).sample
+  def get_first_word(syllables, rhyme=nil)
+    words = (@markov_chain.all_words - PREPOSITIONS)
+    if rhyme
+      words = words & Rhymes.rhyme(rhyme).map(&:downcase)
+    end
+    words.sample
   end
 
   def get_next_word(word, remaining_syllables)

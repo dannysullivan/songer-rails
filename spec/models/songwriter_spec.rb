@@ -3,6 +3,8 @@ require 'rails_helper'
 
 describe Songwriter do
   before do
+    allow_any_instance_of(Lyricist).to receive(:pick_rhyming_lines)
+      .and_return([[build(:lyrics_word)], [build(:lyrics_word)]])
     source_material = MarkovChain.new('here are some test lyrics to try')
     @lyricist = Lyricist.new(source_material)
   end
@@ -35,12 +37,6 @@ describe Songwriter do
       songwriter = Songwriter.new(@lyricist)
       section = songwriter.build_section('x...x...x...x...')
       expect(section.bass_notes.length).to eq 4
-    end
-
-    it 'sets lyrics to an array of words' do
-      songwriter = Songwriter.new(@lyricist)
-      section = songwriter.build_section('xxxxxx..')
-      expect(section.lyrics_words.map(&:syllables).sum).to eq 6
     end
 
     it 'picks notes for the melody' do
