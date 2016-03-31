@@ -53,7 +53,7 @@ class Songwriter
   end
 
   def get_lyrics(number_of_syllables)
-    @lyricist.pick_lyrics(number_of_syllables)
+    @lyricist.pick_lyrics(number_of_syllables).reverse
   end
 
   def duplicate_section_with_new_lyrics(section)

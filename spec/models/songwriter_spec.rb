@@ -3,7 +3,7 @@ require 'rails_helper'
 
 describe Songwriter do
   before do
-    source_material = File.read(Rails.root.join('config', 'sources', 'moby_dick.txt'))
+    source_material = MarkovChain.new('here are some test lyrics to try')
     @lyricist = Lyricist.new(source_material)
   end
 
