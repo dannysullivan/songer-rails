@@ -1,4 +1,6 @@
 class MarkovChain
+  attr_reader :rhymes
+
   def initialize(source)
     @hash = {}
     words = source.split(' ')
@@ -10,6 +12,8 @@ class MarkovChain
         @hash[first_word] = [second_word]
       end
     end
+
+    process_rhymes
   end
 
   def next_words(word)
@@ -18,5 +22,25 @@ class MarkovChain
 
   def all_words
     @hash.keys
+  end
+
+  private
+
+  def process_rhymes
+    @rhymes = []
+    words = @hash.keys
+    rhymer = Rhymes.new
+    unprocessed_words = words
+    words.each_with_index do |word, index|
+      if unprocessed_words.include?(word)
+        rhymes = [word]
+        begin
+          rhymes += unprocessed_words & rhymer.rhyme(word).map(&:downcase)
+        rescue
+        end
+        @rhymes << rhymes
+        unprocessed_words -= rhymes
+      end
+    end
   end
 end

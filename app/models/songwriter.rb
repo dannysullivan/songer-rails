@@ -28,7 +28,13 @@ class Songwriter
   def build_part_of_song(rhythms_available)
     rhythmic_pattern = RHYTHMS_PER_SECTION.times.map{rhythms_available.sample}.join
     section1 = build_section(rhythmic_pattern)
-    section2 = duplicate_section_with_new_lyrics(section1)
+    section2 = duplicate_section(section1)
+
+    number_of_beats = section1.number_of_melody_notes
+    lyrics = @lyricist.pick_rhyming_lines(number_of_beats)
+
+    section1.lyrics_words = lyrics.first.reverse
+    section2.lyrics_words = lyrics.second.reverse
     @song.sections << section1
     @song.sections << section2
   end
@@ -37,11 +43,7 @@ class Songwriter
     melody = create_melody(rhythmic_pattern)
     measures = RHYTHM_MEASURES * RHYTHMS_PER_SECTION
     bass_pattern = measures.times.map{BASS_NOTES.sample}.join('')
-    section = Section.new(pattern: melody,
-                          bass_pattern: bass_pattern)
-
-    section.lyrics_words = get_lyrics(section.number_of_melody_notes)
-    section
+    Section.new(pattern: melody, bass_pattern: bass_pattern)
   end
 
   private
@@ -52,14 +54,12 @@ class Songwriter
     end.join('')
   end
 
-  def get_lyrics(number_of_syllables)
-    @lyricist.pick_lyrics(number_of_syllables).reverse
+  def get_lyrics(number_of_syllables, rhyme=nil)
+    @lyricist.pick_lyrics(number_of_syllables, rhyme).reverse
   end
 
-  def duplicate_section_with_new_lyrics(section)
-    new_section = Section.duplicate_without_lyrics(section)
-    new_section.lyrics_words = get_lyrics(section.number_of_melody_notes)
-    new_section
+  def duplicate_section(section)
+    Section.duplicate_without_lyrics(section)
   end
 
   def create_random_rhythm(beats_in_measure)

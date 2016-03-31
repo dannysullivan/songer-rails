@@ -17,4 +17,11 @@ describe MarkovChain do
       expect(markov_chain.next_words('does')).to eq []
     end
   end
+
+  describe '#rhymes' do
+    it 'returns an array of arrays of rhyming words from the source' do
+      markov_chain = MarkovChain.new('be car see far is')
+      expect(markov_chain.rhymes).to eq [['be', 'see'], ['car', 'far']]
+    end
+  end
 end

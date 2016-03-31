@@ -18,4 +18,14 @@ describe Lyricist do
       expect(lyricist.pick_lyrics(2).map(&:value)).to eq ['it', 'is']
     end
   end
+
+  describe '#pick_rhyming_lines' do
+    it 'returns two lines with the given number of syllables that rhyme' do
+      lyricist = Lyricist.new(MarkovChain.new("a test a rest"))
+      lines = lyricist.pick_rhyming_lines(2)
+      expect([['a', 'test'], ['a', 'rest']]).to include lines.first.map(&:value)
+      expect([['a', 'test'], ['a', 'rest']]).to include lines.second.map(&:value)
+      expect(lines.first.map(&:value)).not_to eq lines.second.map(&:value)
+    end
+  end
 end
