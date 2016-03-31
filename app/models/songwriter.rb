@@ -19,7 +19,7 @@ class Songwriter
 
   def build_default_sections
     build_part_of_song([@song.rhythm1])
-    build_part_of_song([@song.rhythm1, @song.rhythm2])
+    build_part_of_song([@song.rhythm1])
 
     @song.save
     @song.sections
@@ -49,8 +49,18 @@ class Songwriter
   private
 
   def create_melody(rhythmic_pattern)
+    last_note_index = (0..MELODY_NOTES.length).to_a.sample
     rhythmic_pattern.split('').map do |beat|
-      beat == "x" ? MELODY_NOTES.sample.to_s : '.'
+      if beat == "x"
+        movement_options = [0]
+        movement_options << -1 unless last_note_index == 0
+        movement_options << 1 unless last_note_index == MELODY_NOTES.length - 1
+        movement = movement_options.sample
+        last_note_index = (last_note_index + movement) % MELODY_NOTES.length
+        MELODY_NOTES[last_note_index].to_s
+      else
+        '.'
+      end
     end.join('')
   end
 
