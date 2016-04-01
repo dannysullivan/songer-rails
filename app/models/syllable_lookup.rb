@@ -1,6 +1,6 @@
 class SyllableLookup
   def self.find(word)
-    SYLLABLES[word] || count_syllables(word)
+    SYLLABLES[word] || 0
   end
 
   private
@@ -24,6 +24,7 @@ class SyllableLookup
       length -= 1
     end
 
+    puts "#{word}: #{length}"
     return length
   end
 end

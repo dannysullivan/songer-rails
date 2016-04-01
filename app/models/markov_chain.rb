@@ -24,6 +24,11 @@ class MarkovChain
     @hash.keys
   end
 
+  def self.load(file)
+    marshal = File.read(file)
+    Marshal.load(marshal)
+  end
+
   private
 
   def process_rhymes
