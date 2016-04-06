@@ -4,21 +4,22 @@ class Lyricist
   end
 
   def pick_rhyming_lines(syllables)
-    counter = 5
-    begin
-      rhymes = @markov_chain.rhymes.select{|array| array.length >= 2}.sample
-      words = rhymes.sample(2)
-      words.map do |word|
-        pick_lyrics_recursive(syllables, word)
+    rhymes = @markov_chain.rhymes.select{|array| array.length >= 2}.shuffle
+    lyrics = []
+    rhymes.detect do |rhyme_group|
+      lyrics = []
+      2.times do
+        rhyme_group.shuffle.detect do |word|
+          lyrics_word = LyricsWord.new(value: word, syllables: SyllableLookup.find(word))
+          next_lyrics = self.lyrics_from_word(syllables, lyrics_word)
+          lyrics << next_lyrics if next_lyrics
+        end
       end
-    rescue => exception
-      counter -= 1
-      if counter > 0
-        retry
-      else
-        raise exception
-      end
+
+      lyrics.length == 2
     end
+
+    lyrics
   end
 
   protected
@@ -31,28 +32,29 @@ class Lyricist
     words.sample
   end
 
-  def get_next_word(word, remaining_syllables)
-    words = @markov_chain.next_words(word)
-    word = words.select do |word|
+  def next_lyrics_words(word)
+    @markov_chain.next_words(word).map do |word|
       syllables = SyllableLookup.find(word)
-      syllables <= remaining_syllables && syllables > 0
-    end.sample
-    word
+      if syllables > 0
+        LyricsWord.new(value: word, syllables: syllables)
+      end
+    end
   end
 
-  def pick_lyrics_recursive(syllables, current_word)
+  def lyrics_from_word(syllables, current_word)
     if syllables == 0
       []
+    elsif syllables < 0 || current_word.nil?
+      false
     else
-      if current_word
-        current_word_syllables = SyllableLookup.find(current_word)
-        lyrics_word = LyricsWord.new(value: current_word, syllables: current_word_syllables)
-        remaining_syllables = syllables - current_word_syllables
-        next_word = self.get_next_word(current_word, remaining_syllables)
-        [lyrics_word] + self.pick_lyrics_recursive(remaining_syllables, next_word)
-      else # no words found
-        raise "Couldn't create a lyric with the requested syllable count"
+      next_lyrics = nil
+      next_words = self.next_lyrics_words(current_word.value)
+      next_words.shuffle.detect do |next_word|
+        remaining_syllables = syllables - current_word.syllables
+        next_lyrics = self.lyrics_from_word(remaining_syllables, next_word)
       end
+
+      [current_word] + next_lyrics if next_lyrics
     end
   end
 end

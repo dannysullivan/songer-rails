@@ -10,10 +10,9 @@ describe SyllableLookup do
   end
 
   context 'for word that is not in config' do
-    it 'uses an algorithm to count syllables' do
+    it 'returns 0' do
       stub_const('SYLLABLES', {'test' => 1})
-      expect(SyllableLookup.find('red')).to eq 1
-      expect(SyllableLookup.find('bothered')).to eq 2
+      expect(SyllableLookup.find('red')).to eq 0
     end
   end
 end
