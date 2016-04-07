@@ -8,12 +8,10 @@ class Lyricist
     lyrics = []
     rhymes.detect do |rhyme_group|
       lyrics = []
-      2.times do
-        rhyme_group.shuffle.detect do |word|
-          lyrics_word = LyricsWord.new(value: word, syllables: SyllableLookup.find(word))
-          next_lyrics = self.lyrics_from_word(syllables, lyrics_word)
-          lyrics << next_lyrics if next_lyrics
-        end
+      first_line = lyrics_from_group(rhyme_group, syllables)
+      if first_line
+        second_line = lyrics_from_group(rhyme_group - [first_line.first.value], syllables)
+        lyrics = [first_line, second_line].compact
       end
 
       lyrics.length == 2
@@ -24,12 +22,13 @@ class Lyricist
 
   protected
 
-  def get_first_word(syllables, rhyme=nil)
-    words = (@markov_chain.all_words - PREPOSITIONS)
-    if rhyme
-      words = words & Rhymes.rhyme(rhyme).map(&:downcase)
+  def lyrics_from_group(group, syllables)
+    lyrics = nil
+    group.shuffle.detect do |word|
+      lyrics_word = LyricsWord.new(value: word, syllables: SyllableLookup.find(word))
+      lyrics = self.lyrics_from_word(syllables, lyrics_word)
     end
-    words.sample
+    lyrics
   end
 
   def next_lyrics_words(word)

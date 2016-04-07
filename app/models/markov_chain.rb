@@ -1,5 +1,8 @@
 class MarkovChain
-  attr_reader :rhymes
+
+  def rhymes
+    @rhymes.map(&:uniq)
+  end
 
   def initialize(source)
     @hash = {}
