@@ -1,8 +1,8 @@
 class Songwriter
   attr_reader :song
 
-  RHYTHM_MEASURES = 1
-  RHYTHMS_PER_SECTION = 4
+  RHYTHM_MEASURES = 2
+  RHYTHMS_PER_SECTION = 1
   BASS_NOTES = [0, 2, 4, 5, 7, 9]
   BEATS_IN_MEASURE = [6, 8]
 
@@ -18,25 +18,37 @@ class Songwriter
   end
 
   def build_default_sections
-    build_part_of_song([@song.rhythm1])
-    build_part_of_song([@song.rhythm1])
+    verse = build_part_of_song([@song.rhythm1], 2, 1)
+    chorus = build_part_of_song([@song.rhythm1], 1, 2)
+
+    @song.sections += verse
+    @song.sections += chorus
 
     @song.save
     @song.sections
   end
 
-  def build_part_of_song(rhythms_available)
+  def build_part_of_song(rhythms_available, rhyming_pairs, repetitions)
     rhythmic_pattern = RHYTHMS_PER_SECTION.times.map{rhythms_available.sample}.join
-    section1 = build_section(rhythmic_pattern)
-    section2 = duplicate_section(section1)
+    lines = []
+    melody = build_section(rhythmic_pattern)
+    number_of_beats = melody.number_of_melody_notes
 
-    number_of_beats = section1.number_of_melody_notes
-    lyrics = @lyricist.pick_rhyming_lines(number_of_beats)
+    rhyming_pairs.times do
+      lyrics = @lyricist.pick_rhyming_lines(number_of_beats)
 
-    section1.lyrics_words = lyrics.first.reverse
-    section2.lyrics_words = lyrics.second.reverse
-    @song.sections << section1
-    @song.sections << section2
+      repetitions.times do
+        line1 = duplicate_section(melody)
+        line2 = duplicate_section(melody)
+
+
+        line1.lyrics_words = lyrics.first.map(&:dup).reverse
+        line2.lyrics_words = lyrics.second.map(&:dup).reverse
+        lines += [line1, line2]
+      end
+    end
+
+    lines
   end
 
   def build_section(rhythmic_pattern)

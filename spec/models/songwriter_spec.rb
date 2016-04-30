@@ -14,8 +14,8 @@ describe Songwriter do
       songwriter = Songwriter.new(@lyricist)
       song = songwriter.song
       beats_in_measure = song.beats_in_measure
-      expect(song.rhythm1.length).to be beats_in_measure
-      expect(song.rhythm2.length).to be beats_in_measure
+      expect(song.rhythm1.length).to eq beats_in_measure
+      expect(song.rhythm2.length).to eq beats_in_measure
     end
   end
 
@@ -24,11 +24,18 @@ describe Songwriter do
       songwriter = Songwriter.new(@lyricist)
       songwriter.build_default_sections
       song = songwriter.song
-      expect(song.sections.length).to eq 4
       first_section = song.sections.first
       second_section = song.sections.second
       expect(first_section.pattern).to eq second_section.pattern
       expect(first_section.bass_notes).to eq second_section.bass_notes
+    end
+  end
+
+  describe '#build_part_of_song' do
+    it 'adds the specified number of rhyming line pairs' do
+      songwriter = Songwriter.new(@lyricist)
+      part_of_song = songwriter.build_part_of_song(['x..x..x.'], 2)
+      binding.pry
     end
   end
 

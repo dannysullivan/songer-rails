@@ -28,7 +28,7 @@ class SongsController < ApplicationController
   end
 
   def allowed_sources
-    ['Dog (Wiki Page)', 'Moby Dick', 'Edgar Allen Poe']
+    ['Puppy Manual', 'Dog (Wiki Page)', 'Moby Dick', 'Edgar Allen Poe']
   end
 
   def load_source_from_file(file_name)
