@@ -20,11 +20,11 @@ describe Songwriter do
   end
 
   describe '#build_default_sections' do
-    it 'plays two sections twice each' do
+    it 'writes 8 lines total' do
       songwriter = Songwriter.new(@lyricist)
       songwriter.build_default_sections
       song = songwriter.song
-      expect(song.sections.length).to eq 4
+      expect(song.sections.length).to eq 8
       first_section = song.sections.first
       second_section = song.sections.second
       expect(first_section.pattern).to eq second_section.pattern
@@ -45,6 +45,30 @@ describe Songwriter do
       section = songwriter.build_section('xxxxxx..')
       expect(section.pattern.split('')).to include '0'
       expect(section.pattern.split('')).to include '.'
+    end
+  end
+
+  describe '#add_verse' do
+    it 'copies the verse melody but writes new lyrics' do
+      songwriter = Songwriter.new(@lyricist)
+      expect(songwriter.verse_melody).to be
+      verse = songwriter.write_verse
+      expect(verse.pattern).to eq songwriter.verse_melody.pattern
+      expect(verse.bass_notes).to eq songwriter.verse_melody.bass_notes
+      expect(verse.lyrics.length > 0).to be true
+    end
+  end
+
+  describe '#add_chorus' do
+    it 'copies the chorus melody and lyrics' do
+      songwriter = Songwriter.new(@lyricist)
+      expect(songwriter.chorus_melody).to be
+      expect(songwriter.chorus_lyrics).to be
+      chorus = songwriter.write_chorus
+
+      expect(chorus.pattern).to eq songwriter.chorus_melody.pattern
+      expect(chorus.bass_notes).to eq songwriter.chorus_melody.bass_notes
+      expect(chorus.lyrics).to eq songwriter.chorus_lyrics.last.map(&:value).join
     end
   end
 end
