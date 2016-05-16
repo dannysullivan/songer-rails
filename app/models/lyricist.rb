@@ -10,6 +10,11 @@ class Lyricist
     @markov_chain = source
   end
 
+  def rhyming_lines_string(syllables)
+    lyrics = pick_rhyming_lines(syllables)
+    lyrics.map{ |lyrics_words| lyrics_words.map(&:value).join(' ') }.join("\n")
+  end
+
   def pick_rhyming_lines(syllables)
     rhymes = @markov_chain.rhymes.select{|array| array.length >= 2}.shuffle
     lyrics = []

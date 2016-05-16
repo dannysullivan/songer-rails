@@ -13,4 +13,14 @@ describe Lyricist do
       expect(lines.first.first.value).not_to eq lines.second.first.value
     end
   end
+
+  describe '#rhyming_line_string' do
+    it 'returns a string representation of the constructed lyrics' do
+      markov_chain = MarkovChain.new("a test to rest now")
+      lyricist = Lyricist.new(markov_chain)
+      lyrics = lyricist.rhyming_lines_string(1)
+      possible_outcomes = ["test\nrest", "rest\ntest"]
+      expect(possible_outcomes).to include lyrics
+    end
+  end
 end
