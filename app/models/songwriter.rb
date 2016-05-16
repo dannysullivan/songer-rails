@@ -42,8 +42,8 @@ class Songwriter
     line1 = duplicate_section(self.chorus_melody)
     line2 = duplicate_section(self.chorus_melody)
 
-    line1.lyrics_words = @chorus_lyrics.first.map(&:dup).reverse
-    line2.lyrics_words = @chorus_lyrics.second.map(&:dup).reverse
+    line1.lyrics_words = @chorus_lyrics.first.map(&:dup)
+    line2.lyrics_words = @chorus_lyrics.second.map(&:dup)
 
     @song.sections << line1
     @song.sections << line2
@@ -59,8 +59,8 @@ class Songwriter
     line1 = duplicate_section(verse_melody)
     line2 = duplicate_section(verse_melody)
 
-    line1.lyrics_words = lyrics.first.reverse
-    line2.lyrics_words = lyrics.second.reverse
+    line1.lyrics_words = lyrics.first
+    line2.lyrics_words = lyrics.second
 
     @song.sections << line1
     @song.sections << line2
