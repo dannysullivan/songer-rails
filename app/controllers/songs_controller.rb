@@ -4,8 +4,7 @@ class SongsController < ApplicationController
   end
 
   def create
-    source_material = load_source_from_file(lyrics_source)
-    lyricist = Lyricist.new(source_material)
+    lyricist = Lyricist.from_source(lyrics_source)
 
     songwriter = Songwriter.new(lyricist)
     songwriter.build_default_sections
@@ -29,11 +28,5 @@ class SongsController < ApplicationController
 
   def allowed_sources
     ['Dog (Wiki Page)', 'Moby Dick', 'Edgar Allen Poe']
-  end
-
-  def load_source_from_file(file_name)
-    file_name = file_name.gsub(/\ /, '_').gsub(/\(|\)/, '').downcase
-    file = File.read(Rails.root.join('config', 'sources', "#{file_name.underscore}"))
-    Marshal.load(file)
   end
 end

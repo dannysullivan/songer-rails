@@ -1,4 +1,11 @@
 class Lyricist
+  def self.from_source(file_name)
+    file_name = file_name.gsub(/\ /, '_').gsub(/\(|\)/, '').downcase
+    file = File.read(Rails.root.join('config', 'sources', "#{file_name.underscore}"))
+    source = Marshal.load(file)
+    self.new(source)
+  end
+
   def initialize(source)
     @markov_chain = source
   end
@@ -17,7 +24,7 @@ class Lyricist
       lyrics.length == 2
     end
 
-    lyrics
+    lyrics.map(&:reverse)
   end
 
   protected
