@@ -1,6 +1,6 @@
 class TwitterBot
   def initialize
-    @lyricist = Lyricist.from_source('dog_wiki_page')
+    @lyricist = Lyricist.from_source_file('dog_wiki_page')
     self
   end
 

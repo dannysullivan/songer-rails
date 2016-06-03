@@ -1,9 +1,11 @@
 class Lyricist
-  def self.from_source(file_name)
-    file_name = file_name.gsub(/\ /, '_').gsub(/\(|\)/, '').downcase
-    file = File.read(Rails.root.join('config', 'sources', "#{file_name.underscore}"))
-    source = Marshal.load(file)
-    self.new(source)
+  def self.from_source_file(file_name)
+    source = File.read(Rails.root.join('config', 'sources', "#{file_name}.txt"))
+    source = source.downcase.gsub(/[^a-z\s]/i, '')
+    source = source.split(' ').reverse.join(' ')
+
+    markov_chain = MarkovChain.new(source)
+    self.new(markov_chain)
   end
 
   def initialize(source)
