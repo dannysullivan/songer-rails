@@ -1,6 +1,10 @@
 class Lyricist
   def self.from_source_file(file_name)
     source = File.read(Rails.root.join('config', 'sources', "#{file_name}.txt"))
+    self.from_source(source)
+  end
+
+  def self.from_source(source)
     source = source.downcase.gsub(/[^a-z\s]/i, '')
     source = source.split(' ').reverse.join(' ')
 

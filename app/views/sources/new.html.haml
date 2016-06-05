@@ -1,0 +1,16 @@
+.container
+  .row
+    .col-sm-12
+      - if @lyrics
+        %h2 Sample Couplets
+        - @lyrics.each do |couplet|
+          %p.couplet
+            %div= couplet.first
+            %div= couplet.second
+
+  .row
+    .col-sm-12
+      %h2 Try new source
+      = simple_form_for(Source.new) do |form|
+        = form.input :text, as: :text, input_html: { value: @text }
+        = form.submit 'Submit', class: 'btn btn-primary'
