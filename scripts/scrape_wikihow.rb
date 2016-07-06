@@ -24,5 +24,9 @@ ARTICLES_TO_PARSE.to_i.times do |index|
   text += page.css('body').css('li').map(&:text).join("\n")
 end
 
-File.open('config/sources/wikihow.txt', 'w') { |file| file.write(text) }
+puts "finding couplets ..."
+source = Source.new(text: text)
+couplets = source.accidental_couplets
+
+File.open('config/sources/wikihow_couplets.txt', 'w') { |file| file.write(couplets.join("\n")) }
 
