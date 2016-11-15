@@ -1,0 +1,9 @@
+.container
+  .row
+    .col-sm-12
+      %h1 Couplets
+  - @syllable_groups.each do |syllable_count, sentences|
+    %div{class: "syllable-group-#{syllable_count}"}
+      %h2= pluralize(syllable_count, 'syllable')
+      - sentences.each do |sentence|
+        %p= sentence.text

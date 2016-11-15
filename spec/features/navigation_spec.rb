@@ -10,10 +10,10 @@ describe "Navigation", :js do
     expect(page).to have_content "About Songer"
   end
 
-  it 'contains a link to the Test Source page' do
+  it 'contains a link to the Couplets Source page' do
     visit root_path
     within '.header' do
-      click_on "Test Source"
+      click_on "Couplets"
     end
     expect(page).to have_content "Try new source"
   end
