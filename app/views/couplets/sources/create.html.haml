@@ -1,13 +1,14 @@
 .container
   .row
     .col-sm-12
-      %h1 Couplets
+      %h1.text-center Couplets
+      %br
   - @syllable_groups.each do |syllable_count, syllable_group|
-    %div{class: "syllable-group-#{syllable_count}"}
-      %h4= pluralize(syllable_count, 'syllable')
-
-      - syllable_group.rhyme_groups.each_with_index do |rhyme_group, index|
-        %div{class: "rhyme-group-#{index}"}
-          %h5 Rhyme Group #{index}
-          - rhyme_group.each do |sentence|
-            %p= sentence.text
+    .row
+      .col-sm-12
+        .text-center{class: "syllable-group-#{syllable_count}"}
+          - syllable_group.rhyme_groups.each_with_index do |rhyme_group, index|
+            %div{class: "rhyme-group-#{index}"}
+              - rhyme_group.each do |sentence|
+                %p= sentence.text
+              %br

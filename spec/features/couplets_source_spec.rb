@@ -7,8 +7,6 @@ describe 'Viewing couplets from a source' do
 
     click_on 'Submit'
     within '.syllable-group-1' do
-      expect(page).to have_content '1 syllable'
-
       within '.rhyme-group-0' do
         expect(page).to have_content 'Word'
         expect(page).to have_content 'Bird'
@@ -21,7 +19,6 @@ describe 'Viewing couplets from a source' do
     end
 
     within '.syllable-group-2' do
-      expect(page).to have_content '2 syllables'
       expect(page).to have_content 'A word'
       expect(page).to have_content 'The bird'
     end
