@@ -18,4 +18,9 @@ FactoryGirl.define do
     value "test"
     syllables 1
   end
+
+  factory :line, class: Couplets::Line do
+    text "this is some text"
+    syllables 4
+  end
 end

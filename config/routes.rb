@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :sources, only: [:new, :create]
 
   namespace :couplets do
-    resources :sources
+    resources :sources, only: [:new, :create]
+    resources :lines, only: [:index]
   end
 end

@@ -21,4 +21,11 @@ class Couplets::SyllableGroup
 
     groups.reject{ |group| group.length == 1 }
   end
+
+  def create_lines
+    rhyme_groups.each do |rhyme_group|
+      group = Couplets::RhymeGroup.create(syllables: rhyme_group.first.syllable_count)
+      rhyme_group.each{ |sentence| Couplets::Line.create(rhyme_group: group, text: sentence.text) }
+    end
+  end
 end

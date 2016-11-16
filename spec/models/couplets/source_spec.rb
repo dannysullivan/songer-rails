@@ -49,4 +49,17 @@ describe Couplets::Source do
       expect(source.syllable_groups).to eq([])
     end
   end
+
+  describe '#create_lines' do
+    it 'delegates to syllable groups' do
+      sentence = double(:sentence, syllable_count: 3)
+      allow(Couplets::Sentence).to receive(:new).with('some text here').and_return(sentence)
+
+      group = double(:group)
+      allow(Couplets::SyllableGroup).to receive(:new).with(3, [sentence]).and_return(group)
+
+      expect(group).to receive(:create_lines)
+      Couplets::Source.new(text: 'some text here').create_lines
+    end
+  end
 end

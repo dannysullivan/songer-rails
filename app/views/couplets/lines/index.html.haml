@@ -1,0 +1,12 @@
+.container
+  .row
+    .col-sm-12
+      %h1.text-center Couplets
+      %br
+  - @rhyme_groups.each do |rhyme_group|
+    .row
+      .col-sm-12
+        .text-center.rhyme-group
+          - rhyme_group.lines.each do |line|
+            %p= line.text
+          %br

@@ -18,6 +18,7 @@ gem 'angular_rails_csrf'
 gem 'angular-rails-templates'
 gem 'midilib'
 gem 'simple_form'
+gem 'rails-controller-testing'
 gem 'rhymes'
 gem 'twitter'
 

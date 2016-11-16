@@ -15,4 +15,8 @@ class Couplets::Source
     groups = sentences.group_by(&:syllable_count).reject{ |key, _| key.nil? || key == 1 }
     groups.map{ |syllables, sentences| Couplets::SyllableGroup.new(syllables, sentences) }
   end
+
+  def create_lines
+    syllable_groups.map(&:create_lines)
+  end
 end

@@ -5,8 +5,8 @@ class Couplets::SourcesController < ApplicationController
   end
 
   def create
-    source = Couplets::Source.new(source_params.to_h)
-    @syllable_groups = source.syllable_groups.sort_by(&:syllables)
+    Couplets::Source.new(source_params.to_h).create_lines
+    redirect_to couplets_lines_path
   end
 
   private
