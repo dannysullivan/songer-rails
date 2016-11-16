@@ -5,7 +5,7 @@ class Couplets::SourcesController < ApplicationController
   end
 
   def create
-    source = Couplets::Source.new(source_params)
+    source = Couplets::Source.new(source_params.to_h)
     @syllable_groups = source.syllable_groups.sort
   end
 

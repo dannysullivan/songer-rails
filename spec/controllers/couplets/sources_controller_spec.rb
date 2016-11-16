@@ -5,7 +5,7 @@ describe Couplets::SourcesController do
     it 'creates a new Couplets::Source' do
       source = double(:source, syllable_groups: {})
       expect(Couplets::Source).to receive(:new).with(text: 'here is some text').and_return(source)
-      post :create, { couplets_source: { text: 'here is some text' } }
+      post :create, params: { couplets_source: { text: 'here is some text' } }
     end
   end
 end
