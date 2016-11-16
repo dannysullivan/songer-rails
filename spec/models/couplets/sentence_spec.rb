@@ -18,4 +18,22 @@ describe Couplets::Sentence do
       expect(sentence.syllable_count).to be_nil
     end
   end
+
+  describe '#rhymes_with' do
+    it 'returns true if the last words of the sentences rhyme' do
+      allow(Couplets::RhymeLibrary).to receive(:check_rhyme).with('rhyme', 'time').and_return(true)
+
+      sentence = Couplets::Sentence.new('this is rhyme')
+      rhyme = Couplets::Sentence.new('all the time')
+      expect(sentence.rhymes_with?(rhyme)).to eq true
+    end
+
+    it 'returns false if the last words of the sentences do not rhyme' do
+      allow(Couplets::RhymeLibrary).to receive(:check_rhyme).with('rhyme', 'nope').and_return(false)
+
+      sentence = Couplets::Sentence.new('this is rhyme')
+      rhyme = Couplets::Sentence.new('all the nope')
+      expect(sentence.rhymes_with?(rhyme)).to eq false
+    end
+  end
 end

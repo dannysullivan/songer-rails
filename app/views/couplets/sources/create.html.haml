@@ -2,8 +2,12 @@
   .row
     .col-sm-12
       %h1 Couplets
-  - @syllable_groups.each do |syllable_count, sentences|
+  - @syllable_groups.each do |syllable_count, syllable_group|
     %div{class: "syllable-group-#{syllable_count}"}
-      %h2= pluralize(syllable_count, 'syllable')
-      - sentences.each do |sentence|
-        %p= sentence.text
+      %h4= pluralize(syllable_count, 'syllable')
+
+      - syllable_group.rhyme_groups.each_with_index do |rhyme_group, index|
+        %div{class: "rhyme-group-#{index}"}
+          %h5 Rhyme Group #{index}
+          - rhyme_group.each do |sentence|
+            %p= sentence.text

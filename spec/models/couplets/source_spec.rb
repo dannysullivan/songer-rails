@@ -18,10 +18,19 @@ describe Couplets::Source do
       allow(Couplets::Sentence).to receive(:new).with('Two syllables 1').and_return(two_syllable_sentence1)
       allow(Couplets::Sentence).to receive(:new).with('Two syllables 2').and_return(two_syllable_sentence2)
 
+      group1 = double(:syllable_group)
+      group2 = double(:syllable_group)
+
+      allow(Couplets::SyllableGroup).to receive(:new).with([one_syllable_sentence]).and_return(group1)
+      allow(Couplets::SyllableGroup).to receive(:new).with([
+        two_syllable_sentence1,
+        two_syllable_sentence2
+      ]).and_return(group2)
+
       source = Couplets::Source.new(text: 'One syllable. Two syllables 1. Two syllables 2.')
       expect(source.syllable_groups).to eq({
-        1 => [one_syllable_sentence],
-        2 => [two_syllable_sentence1, two_syllable_sentence2]
+        1 => group1,
+        2 => group2
       })
     end
 
