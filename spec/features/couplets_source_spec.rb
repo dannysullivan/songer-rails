@@ -12,4 +12,16 @@ describe 'Viewing couplets from a source' do
 
     expect(page).not_to have_content 'Fakeword'
   end
+
+  it 'adds new lines to prexisting rhyme groups' do
+    group = FactoryGirl.create(:rhyme_group, syllables: 2)
+    FactoryGirl.create(:line, rhyme_group: group, text: 'some rhyme')
+    FactoryGirl.create(:line, rhyme_group: group, text: 'some time')
+
+    visit new_couplets_source_path
+    fill_in 'Text', with: 'a lime. a mime.'
+
+    click_on 'Submit'
+    expect(page).to have_selector('.rhyme-group', text: 'some rhyme some time a lime a mime')
+  end
 end

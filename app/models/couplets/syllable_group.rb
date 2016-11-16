@@ -24,7 +24,7 @@ class Couplets::SyllableGroup
 
   def create_lines
     rhyme_groups.each do |rhyme_group|
-      group = Couplets::RhymeGroup.create(syllables: rhyme_group.first.syllable_count)
+      group = Couplets::RhymeGroup.find_or_create_for_sentence(rhyme_group.first)
       rhyme_group.each{ |sentence| Couplets::Line.create(rhyme_group: group, text: sentence.text) }
     end
   end

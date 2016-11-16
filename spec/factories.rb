@@ -21,6 +21,10 @@ FactoryGirl.define do
 
   factory :line, class: Couplets::Line do
     text "this is some text"
+    association :rhyme_group
+  end
+
+  factory :rhyme_group, class: Couplets::RhymeGroup do
     syllables 4
   end
 end

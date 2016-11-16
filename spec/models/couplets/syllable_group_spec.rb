@@ -30,7 +30,7 @@ describe Couplets::SyllableGroup do
       allow(rhyme1).to receive(:rhymes_with?).with(rhyme2).and_return(true)
 
       group = double(:rhyme_group)
-      expect(Couplets::RhymeGroup).to receive(:create).with(syllables: 2).and_return(group)
+      expect(Couplets::RhymeGroup).to receive(:find_or_create_for_sentence).with(rhyme1).and_return(group)
 
       expect(Couplets::Line).to receive(:create).with({
         rhyme_group: group,
