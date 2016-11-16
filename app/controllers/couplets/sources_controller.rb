@@ -6,7 +6,7 @@ class Couplets::SourcesController < ApplicationController
 
   def create
     source = Couplets::Source.new(source_params.to_h)
-    @syllable_groups = source.syllable_groups.sort
+    @syllable_groups = source.syllable_groups.sort_by(&:syllables)
   end
 
   private

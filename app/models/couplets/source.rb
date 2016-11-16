@@ -13,6 +13,6 @@ class Couplets::Source
 
   def syllable_groups
     groups = sentences.group_by(&:syllable_count).reject{ |key, _| key.nil? || key == 1 }
-    groups.update(groups){ |key, sentences| Couplets::SyllableGroup.new(sentences) }
+    groups.map{ |syllables, sentences| Couplets::SyllableGroup.new(syllables, sentences) }
   end
 end

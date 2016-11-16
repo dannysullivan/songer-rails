@@ -3,10 +3,10 @@
     .col-sm-12
       %h1.text-center Couplets
       %br
-  - @syllable_groups.each do |syllable_count, syllable_group|
+  - @syllable_groups.each do |syllable_group|
     .row
       .col-sm-12
-        .text-center{class: "syllable-group-#{syllable_count}"}
+        .text-center{class: "syllable-group-#{syllable_group.syllables}"}
           - syllable_group.rhyme_groups.each_with_index do |rhyme_group, index|
             %div{class: "rhyme-group-#{index}"}
               - rhyme_group.each do |sentence|

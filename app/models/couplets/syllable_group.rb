@@ -1,9 +1,10 @@
 module Couplets; end
 
 class Couplets::SyllableGroup
-  attr_reader :sentences
+  attr_reader :syllables, :sentences
 
-  def initialize(sentences)
+  def initialize(syllables, sentences)
+    @syllables = syllables
     @sentences = sentences
   end
 

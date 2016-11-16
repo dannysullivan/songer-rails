@@ -21,17 +21,14 @@ describe Couplets::Source do
       group1 = double(:syllable_group)
       group2 = double(:syllable_group)
 
-      allow(Couplets::SyllableGroup).to receive(:new).with([two_syllable_sentence]).and_return(group1)
-      allow(Couplets::SyllableGroup).to receive(:new).with([
+      allow(Couplets::SyllableGroup).to receive(:new).with(2, [two_syllable_sentence]).and_return(group1)
+      allow(Couplets::SyllableGroup).to receive(:new).with(3, [
         three_syllable_sentence1,
         three_syllable_sentence2
       ]).and_return(group2)
 
       source = Couplets::Source.new(text: 'Two syllables. Three syllables 1. Three syllables 2.')
-      expect(source.syllable_groups).to eq({
-        2 => group1,
-        3 => group2
-      })
+      expect(source.syllable_groups).to eq([group1, group2])
     end
 
     it 'disregards sentences with uncountable syllables' do
@@ -40,7 +37,7 @@ describe Couplets::Source do
       allow(Couplets::Sentence).to receive(:new).with('Fakeword').and_return(sentence)
 
       source = Couplets::Source.new(text: 'Fakeword')
-      expect(source.syllable_groups).to eq({})
+      expect(source.syllable_groups).to eq([])
     end
 
     it 'disregards sentences with one syllable' do
@@ -49,7 +46,7 @@ describe Couplets::Source do
       allow(Couplets::Sentence).to receive(:new).with('One syllable').and_return(sentence)
 
       source = Couplets::Source.new(text: 'One syllable.')
-      expect(source.syllable_groups).to eq({})
+      expect(source.syllable_groups).to eq([])
     end
   end
 end
