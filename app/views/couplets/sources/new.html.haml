@@ -1,7 +1,7 @@
 .container
   .row
     .col-sm-12
-      %h2 Try new source
+      %h2 Add new source
       = simple_form_for(Couplets::Source.new) do |form|
         = form.input :text, as: :text
         = form.submit 'Submit', class: 'btn btn-primary'

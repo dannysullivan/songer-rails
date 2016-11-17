@@ -4,6 +4,9 @@
       .text-center
         %h2 Sample Verse
         %br
-        - @lyric.lines.each do |line|
-          %p= line.text
+        - if @lyric
+          - @lyric.lines.each do |line|
+            %p= line.text
+        - else
+          %p Please add sources to see sample verses.
 

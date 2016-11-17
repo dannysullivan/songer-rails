@@ -3,7 +3,7 @@ require 'rails_helper'
 
 describe "automatic song creation", :js do
   it 'displays a set of lyrics' do
-    visit root_path
+    visit new_song_path
     click_on "Create song"
     expect(page).to have_content "Play"
     expect(page).to have_content "Download as MIDI"
@@ -13,14 +13,14 @@ describe "automatic song creation", :js do
   end
 
   it 'allows user to select a lyrical source' do
-    visit root_path
+    visit new_song_path
     select 'Moby Dick', from: 'Lyrics Source'
     click_on 'Create song'
     within ".lyrics" do
       expect(page).to have_selector '.word'
     end
 
-    visit root_path
+    visit new_song_path
     select 'Edgar Allen Poe', from: 'Lyrics Source'
     click_on 'Create song'
     within ".lyrics" do

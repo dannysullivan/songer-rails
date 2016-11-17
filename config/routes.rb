@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
-  root to: 'main#index'
+  root to: 'couplets/lyrics#index'
 
   get '/about', to: 'main#about'
   resources :songs, only: [:new, :create, :show]
-  resources :sources, only: [:new, :create]
 
   namespace :couplets do
     resources :sources, only: [:new, :create]
