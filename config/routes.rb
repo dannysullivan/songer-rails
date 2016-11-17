@@ -8,5 +8,6 @@ Rails.application.routes.draw do
   namespace :couplets do
     resources :sources, only: [:new, :create]
     resources :lines, only: [:index]
+    resources :lyrics, only: [:index]
   end
 end

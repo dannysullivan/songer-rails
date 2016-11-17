@@ -1,0 +1,9 @@
+.container
+  .row
+    .col-sm-12
+      .text-center
+        %h2 Sample Verse
+        %br
+        - @lyric.lines.each do |line|
+          %p= line.text
+
