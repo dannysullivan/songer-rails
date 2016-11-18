@@ -1,0 +1,6 @@
+---
+applications:
+- name: songer
+  command: bundle exec rails db:migrate && bundle exec rails s -p $PORT
+  routes:
+  - route: songer.cfapps.io
