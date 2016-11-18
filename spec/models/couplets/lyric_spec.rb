@@ -13,7 +13,7 @@ describe Couplets::Lyric do
 
       query_result = double(:query_result)
       allow(query_result).to receive(:sample).with(2).and_return([group1, group2])
-      allow(Couplets::RhymeGroup).to receive(:where).with(syllables: 8).and_return(query_result)
+      allow(Couplets::RhymeGroup).to receive(:where).with('syllables > 4 AND syllables <= 8').and_return(query_result)
 
       expect(described_class.new.lines).to eq [line1, line2, line3, line4]
     end
@@ -31,7 +31,7 @@ describe Couplets::Lyric do
 
       query_result = double(:query_result)
       allow(query_result).to receive(:sample).with(2).and_return([group1, group2])
-      allow(Couplets::RhymeGroup).to receive(:where).with(syllables: 8).and_return(query_result)
+      allow(Couplets::RhymeGroup).to receive(:where).with('syllables > 4 AND syllables <= 8').and_return(query_result)
 
       expect(described_class.new.lines).to eq [line1, line2, line3, line4]
     end

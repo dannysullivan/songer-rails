@@ -2,6 +2,9 @@ module Couplets; end
 
 class Couplets::LyricsController < ApplicationController
   def index
-    @lyric = Couplets::Lyric.new if Couplets::RhymeGroup.first
+    if Couplets::RhymeGroup.first
+      @lyric = Couplets::Lyric.new
+      @title = @lyric.lines.first.text.split(' ').sample.titleize
+    end
   end
 end

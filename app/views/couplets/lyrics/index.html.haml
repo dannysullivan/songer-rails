@@ -1,12 +1,18 @@
 .container
   .row
     .col-sm-12
-      .text-center
-        %h2 Sample Verse
-        %br
+  .row
+    .col-sm-12
+      .text-center.lead
         - if @lyric
-          - @lyric.lines.each do |line|
-            %p= line.text
+          %h1= @lyric.lines.first.text.split(' ').sample.titleize
+          %br
+          .verse
+            - @lyric.lines.each do |line|
+              %p= line.text
+
+          %br
+          = link_to 'Try again', root_path
         - else
           %p Please add sources to see sample verses.
 
