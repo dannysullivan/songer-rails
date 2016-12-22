@@ -1,6 +1,4 @@
-module Couplets; end
-
-class Couplets::Lyric
+class Lyric
   attr_reader :lines
 
   def initialize

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Couplets::Lyric do
+describe Lyric do
   describe '#lines' do
     it 'interleaves the lines from two rhyme groups' do
       line1 = double(:line1)
