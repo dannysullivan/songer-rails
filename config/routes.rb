@@ -4,9 +4,7 @@ Rails.application.routes.draw do
   get '/about', to: 'main#about'
   resources :songs, only: [:new, :create, :show]
 
-  namespace :couplets do
-    resources :sources, only: [:new, :create]
-    resources :lines, only: [:index]
-    resources :lyrics, only: [:index]
-  end
+  resources :sources, only: [:new, :create]
+  resources :lines, only: [:index]
+  resources :lyrics, only: [:index]
 end

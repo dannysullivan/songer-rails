@@ -1,12 +1,10 @@
-module Couplets; end
-
-class Couplets::SourcesController < ApplicationController
+class SourcesController < ApplicationController
   def new
   end
 
   def create
     Couplets::Source.new(source_params.to_h).create_lines
-    redirect_to couplets_lines_path
+    redirect_to lines_path
   end
 
   private

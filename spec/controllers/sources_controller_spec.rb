@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Couplets::SourcesController do
+describe SourcesController do
   describe '#create' do
     it 'creates a new Couplets::Source' do
       source = double(:source)

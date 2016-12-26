@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'Viewing couplets from a source' do
   it 'displays sentences from the source grouped by syllables and rhyme' do
-    visit new_couplets_source_path
+    visit new_source_path
     fill_in 'Text', with: 'Handle. Candle. Singing. Bringing. A handle. The candle. Fakeword.'
 
     click_on 'Submit'
@@ -18,7 +18,7 @@ describe 'Viewing couplets from a source' do
     FactoryGirl.create(:line, rhyme_group: group, text: 'some rhyme')
     FactoryGirl.create(:line, rhyme_group: group, text: 'some time')
 
-    visit new_couplets_source_path
+    visit new_source_path
     fill_in 'Text', with: 'a lime. a mime.'
 
     click_on 'Submit'

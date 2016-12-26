@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Couplets::LinesController do
+describe LinesController do
   describe '#index' do
     it 'displays all Couplets::RhymeGroups' do
       group = double(:group)

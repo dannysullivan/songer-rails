@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Couplets::LyricsController do
+describe LyricsController do
   describe '#index' do
     it 'creates a new lyric if sources have been added to the database' do
       lyric = double(:lyric, lines: [double(:line, text: 'word')])

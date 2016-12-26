@@ -10,7 +10,7 @@ describe 'Lyrics interface' do
     FactoryGirl.create(:line, rhyme_group: group2, text: 'line one')
     FactoryGirl.create(:line, rhyme_group: group2, text: 'line two')
 
-    visit couplets_lyrics_path
+    visit lyrics_path
 
     expect(page).to have_content 'line one line one line two line two'
   end

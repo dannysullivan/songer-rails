@@ -1,6 +1,4 @@
-module Couplets; end
-
-class Couplets::LyricsController < ApplicationController
+class LyricsController < ApplicationController
   def index
     if Couplets::RhymeGroup.first
       @lyric = Lyric.new
