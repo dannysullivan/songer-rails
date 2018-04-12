@@ -12,3 +12,5 @@
                 - @lyrics_sources.each do |source|
                   %option{value: source}= source
           = form.button :submit, "Create song", class: 'btn btn-primary btn-lg'
+        %br
+        = link_to 'About Songer', about_path

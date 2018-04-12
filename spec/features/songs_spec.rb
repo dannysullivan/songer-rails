@@ -27,4 +27,10 @@ describe "automatic song creation", :js do
       expect(page).to have_selector '.word'
     end
   end
+
+  it 'displays a link to the About page' do
+    visit new_song_path
+    click_on 'About Songer'
+    expect(page).to have_content 'Songer is an automatic songwriting tool.'
+  end
 end
