@@ -4,7 +4,7 @@ require 'rails_helper'
 describe "Songs" do
   describe "#get .mid format" do
     it 'returns a midi version of the song' do
-      FactoryGirl.create(:song)
+      FactoryBot.create(:song)
 
       get '/songs/1.mid'
 

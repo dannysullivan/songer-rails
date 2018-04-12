@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :song do
     rhythm1 "x..x..x."
     rhythm2 "x.x.x.x."

@@ -14,9 +14,9 @@ describe 'Viewing couplets from a source', :js do
   end
 
   it 'adds new lines to prexisting rhyme groups' do
-    group = FactoryGirl.create(:rhyme_group, syllables: 2)
-    FactoryGirl.create(:line, rhyme_group: group, text: 'some rhyme')
-    FactoryGirl.create(:line, rhyme_group: group, text: 'some time')
+    group = FactoryBot.create(:rhyme_group, syllables: 2)
+    FactoryBot.create(:line, rhyme_group: group, text: 'some rhyme')
+    FactoryBot.create(:line, rhyme_group: group, text: 'some time')
 
     visit new_source_path
     fill_in 'Text', with: 'a lime. a mime.'
