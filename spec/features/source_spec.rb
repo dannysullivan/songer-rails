@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Viewing couplets from a source' do
+describe 'Viewing couplets from a source', :js do
   it 'displays sentences from the source grouped by syllables and rhyme' do
     visit new_source_path
     fill_in 'Text', with: 'Handle. Candle. Singing. Bringing. A handle. The candle. Fakeword.'

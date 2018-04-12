@@ -15,6 +15,7 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'capybara/rspec'
+Capybara.server = :webrick
 Capybara.javascript_driver = :webkit
 
 RSpec.configure do |config|

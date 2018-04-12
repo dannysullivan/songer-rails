@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Lyrics interface' do
+describe 'Lyrics interface', :js do
   it 'viewing generated lyrics' do
     group1 = FactoryGirl.create(:rhyme_group, syllables: 8)
     FactoryGirl.create(:line, rhyme_group: group1, text: 'line one')
@@ -12,6 +12,6 @@ describe 'Lyrics interface' do
 
     visit lyrics_path
 
-    expect(page).to have_content 'line one line one line two line two'
+    expect(page).to have_content "line one line one line two line two"
   end
 end
